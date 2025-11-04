@@ -143,11 +143,11 @@
         function abrirModal(json) {
 
             //vaciar campos
-            $("#txtid").val(0)
-            $("#txtNombres").val("")
-            $("#txtApellidos").val("")
-            $("#txtCorreo").val("")
-            $("#cboActivo").val(1)
+            $("#txtid").val(0);
+            $("#txtNombres").val("");
+            $("#txtApellidos").val("");
+            $("#txtCorreo").val("");
+            $("#cboActivo").val(1);
 
             $("#MensajeError").hide();
             
@@ -156,11 +156,11 @@
             if (json != null) {
 
                 //El # es para hacer referencia a la etiqueta del input por medio de su atributo Id.
-                $("#txtid").val(json.IdUsuario)
-                $("#txtNombres").val(json.Nombres)
-                $("#txtApellidos").val(json.Apellidos)
-                $("#txtCorreo").val(json.Correo)
-                $("#cboActivo").val(json.Activo == true ? 1 : 0)
+                $("#txtid").val(json.IdUsuario);
+                $("#txtNombres").val(json.Nombres);
+                $("#txtApellidos").val(json.Apellidos);
+                $("#txtCorreo").val(json.Correo);
+                $("#cboActivo").val(json.Activo == true ? 1 : 0);
 
             }
 
