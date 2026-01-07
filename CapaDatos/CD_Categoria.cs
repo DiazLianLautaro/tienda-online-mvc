@@ -12,7 +12,7 @@ namespace CapaDatos
 {
     public class CD_Categoria
     {
-        public List<Categoria> Listar()
+        public List<Categoria> Listar(bool soloActivos)
         {
             List<Categoria> list = new List<Categoria>();
 
@@ -20,9 +20,15 @@ namespace CapaDatos
             {
                 using (SqlConnection oConexion = new SqlConnection(Conexion.cn))
                 {
-                    string query = "select IdCategoria, Descripcion, Activo From CATEGORIA";
+                    StringBuilder sb = new StringBuilder();
 
-                    SqlCommand cmd = new SqlCommand(query, oConexion);
+                    sb.AppendLine("select Id, Descripcion, Activo From CATEGORIA ");
+                    if (soloActivos)
+                        sb.AppendLine("where activo = 1");
+
+                    //string query = "select Id, Descripcion, Activo From CATEGORIA ";
+
+                    SqlCommand cmd = new SqlCommand(sb.ToString(), oConexion);
                     cmd.CommandType = CommandType.Text;
 
                     oConexion.Open();
@@ -35,7 +41,7 @@ namespace CapaDatos
                             list.Add(
                                 new Categoria()
                                 {
-                                    IdCategoria = Convert.ToInt32(dr["IdCategoria"]),
+                                    IdCategoria = Convert.ToInt32(dr["Id"]),
                                     Descripcion = dr["Descripcion"].ToString(),
                                     Activo = Convert.ToBoolean(dr["Activo"])
                                 }

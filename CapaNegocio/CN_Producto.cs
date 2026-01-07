@@ -12,9 +12,14 @@ namespace CapaNegocio
     {
         private CD_Productos objCapaDato = new CD_Productos();
 
-        public List<Producto> Listar()
+        public List<Producto> Listar(bool soloActivos)
         {
-            return objCapaDato.Listar();
+            return objCapaDato.Listar(soloActivos);
+        }
+
+        public Producto Detalle(int Id)
+        {
+            return objCapaDato.Detalle(Id);
         }
 
         public int Registrar(Producto obj, out string Mensaje)
@@ -38,7 +43,7 @@ namespace CapaNegocio
             {
                 Mensaje = "Debe selecionar una Categoría";
             }
-            else if (obj.Precio == 0)
+            else if (obj.oDetalle.PrecioVenta == 0)
             {
                 Mensaje = "Debe ingresar el Precio del producto";
             }
@@ -83,7 +88,7 @@ namespace CapaNegocio
             {
                 Mensaje = "Debe selecionar una Categoría";
             }
-            else if (obj.Precio == 0)
+            else if (obj.oDetalle.PrecioVenta == 0)
             {
                 Mensaje = "Debe ingresar el Precio del producto";
             }
@@ -113,5 +118,7 @@ namespace CapaNegocio
         {
             return objCapaDato.Eliminar(id, out Mensaje);
         }
+
+        
     }
 }

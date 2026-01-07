@@ -1,0 +1,207 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Lauty\\Documents\\CYG\\TiendaCYG\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3B25315B-79C1-4938-9CB9-2AED7CEE2F7E}|CapaPresentacionTienda\\CapaPresentacionTienda.csproj|c:\\users\\lauty\\documents\\cyg\\tiendacyg\\capapresentaciontienda\\views\\tienda\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3B25315B-79C1-4938-9CB9-2AED7CEE2F7E}|CapaPresentacionTienda\\CapaPresentacionTienda.csproj|solutionrelative:capapresentaciontienda\\views\\tienda\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3B25315B-79C1-4938-9CB9-2AED7CEE2F7E}|CapaPresentacionTienda\\CapaPresentacionTienda.csproj|c:\\users\\lauty\\documents\\cyg\\tiendacyg\\capapresentaciontienda\\controllers\\tiendacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B25315B-79C1-4938-9CB9-2AED7CEE2F7E}|CapaPresentacionTienda\\CapaPresentacionTienda.csproj|solutionrelative:capapresentaciontienda\\controllers\\tiendacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3B25315B-79C1-4938-9CB9-2AED7CEE2F7E}|CapaPresentacionTienda\\CapaPresentacionTienda.csproj|c:\\users\\lauty\\documents\\cyg\\tiendacyg\\capapresentaciontienda\\views\\tienda\\detalleproducto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3B25315B-79C1-4938-9CB9-2AED7CEE2F7E}|CapaPresentacionTienda\\CapaPresentacionTienda.csproj|solutionrelative:capapresentaciontienda\\views\\tienda\\detalleproducto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3B25315B-79C1-4938-9CB9-2AED7CEE2F7E}|CapaPresentacionTienda\\CapaPresentacionTienda.csproj|c:\\users\\lauty\\documents\\cyg\\tiendacyg\\capapresentaciontienda\\views\\mantenedor\\detalle.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3B25315B-79C1-4938-9CB9-2AED7CEE2F7E}|CapaPresentacionTienda\\CapaPresentacionTienda.csproj|solutionrelative:capapresentaciontienda\\views\\mantenedor\\detalle.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3B25315B-79C1-4938-9CB9-2AED7CEE2F7E}|CapaPresentacionTienda\\CapaPresentacionTienda.csproj|c:\\users\\lauty\\documents\\cyg\\tiendacyg\\capapresentaciontienda\\views\\tienda\\carrito.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3B25315B-79C1-4938-9CB9-2AED7CEE2F7E}|CapaPresentacionTienda\\CapaPresentacionTienda.csproj|solutionrelative:capapresentaciontienda\\views\\tienda\\carrito.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3B25315B-79C1-4938-9CB9-2AED7CEE2F7E}|CapaPresentacionTienda\\CapaPresentacionTienda.csproj|c:\\users\\lauty\\documents\\cyg\\tiendacyg\\capapresentaciontienda\\views\\mantenedor\\producto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3B25315B-79C1-4938-9CB9-2AED7CEE2F7E}|CapaPresentacionTienda\\CapaPresentacionTienda.csproj|solutionrelative:capapresentaciontienda\\views\\mantenedor\\producto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3B25315B-79C1-4938-9CB9-2AED7CEE2F7E}|CapaPresentacionTienda\\CapaPresentacionTienda.csproj|c:\\users\\lauty\\documents\\cyg\\tiendacyg\\capapresentaciontienda\\views\\home\\usuarios.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3B25315B-79C1-4938-9CB9-2AED7CEE2F7E}|CapaPresentacionTienda\\CapaPresentacionTienda.csproj|solutionrelative:capapresentaciontienda\\views\\home\\usuarios.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F0F914C0-F499-4C34-BA13-B32EAEDD6DA3}|CapaNegocio\\CapaNegocio.csproj|c:\\users\\lauty\\documents\\cyg\\tiendacyg\\capanegocio\\cn_usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F0F914C0-F499-4C34-BA13-B32EAEDD6DA3}|CapaNegocio\\CapaNegocio.csproj|solutionrelative:capanegocio\\cn_usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5513563-CFCE-4341-AC87-2B805BB6105C}|CapaDatos\\CapaDatos.csproj|c:\\users\\lauty\\documents\\cyg\\tiendacyg\\capadatos\\cd_usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5513563-CFCE-4341-AC87-2B805BB6105C}|CapaDatos\\CapaDatos.csproj|solutionrelative:capadatos\\cd_usuarios.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3B25315B-79C1-4938-9CB9-2AED7CEE2F7E}|CapaPresentacionTienda\\CapaPresentacionTienda.csproj|c:\\users\\lauty\\documents\\cyg\\tiendacyg\\capapresentaciontienda\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B25315B-79C1-4938-9CB9-2AED7CEE2F7E}|CapaPresentacionTienda\\CapaPresentacionTienda.csproj|solutionrelative:capapresentaciontienda\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3B25315B-79C1-4938-9CB9-2AED7CEE2F7E}|CapaPresentacionTienda\\CapaPresentacionTienda.csproj|c:\\users\\lauty\\documents\\cyg\\tiendacyg\\capapresentaciontienda\\controllers\\accesocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3B25315B-79C1-4938-9CB9-2AED7CEE2F7E}|CapaPresentacionTienda\\CapaPresentacionTienda.csproj|solutionrelative:capapresentaciontienda\\controllers\\accesocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 213,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lauty\\Documents\\CYG\\TiendaCYG\\CapaPresentacionTienda\\Views\\Tienda\\Index.cshtml",
+              "RelativeDocumentMoniker": "CapaPresentacionTienda\\Views\\Tienda\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Lauty\\Documents\\CYG\\TiendaCYG\\CapaPresentacionTienda\\Views\\Tienda\\Index.cshtml",
+              "RelativeToolTip": "CapaPresentacionTienda\\Views\\Tienda\\Index.cshtml",
+              "ViewState": "AgIAAOABAAAAAAAAAAAAAPsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-07T11:26:53.906Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Detalle.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lauty\\Documents\\CYG\\TiendaCYG\\CapaPresentacionTienda\\Views\\Mantenedor\\Detalle.cshtml",
+              "RelativeDocumentMoniker": "CapaPresentacionTienda\\Views\\Mantenedor\\Detalle.cshtml",
+              "ToolTip": "C:\\Users\\Lauty\\Documents\\CYG\\TiendaCYG\\CapaPresentacionTienda\\Views\\Mantenedor\\Detalle.cshtml",
+              "RelativeToolTip": "CapaPresentacionTienda\\Views\\Mantenedor\\Detalle.cshtml",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAAAHoAAABiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-07T10:20:56.169Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DetalleProducto.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lauty\\Documents\\CYG\\TiendaCYG\\CapaPresentacionTienda\\Views\\Tienda\\DetalleProducto.cshtml",
+              "RelativeDocumentMoniker": "CapaPresentacionTienda\\Views\\Tienda\\DetalleProducto.cshtml",
+              "ToolTip": "C:\\Users\\Lauty\\Documents\\CYG\\TiendaCYG\\CapaPresentacionTienda\\Views\\Tienda\\DetalleProducto.cshtml",
+              "RelativeToolTip": "CapaPresentacionTienda\\Views\\Tienda\\DetalleProducto.cshtml",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAEwAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-07T09:33:27.734Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TiendaController.cs",
+              "DocumentMoniker": "C:\\Users\\Lauty\\Documents\\CYG\\TiendaCYG\\CapaPresentacionTienda\\Controllers\\TiendaController.cs",
+              "RelativeDocumentMoniker": "CapaPresentacionTienda\\Controllers\\TiendaController.cs",
+              "ToolTip": "C:\\Users\\Lauty\\Documents\\CYG\\TiendaCYG\\CapaPresentacionTienda\\Controllers\\TiendaController.cs",
+              "RelativeToolTip": "CapaPresentacionTienda\\Controllers\\TiendaController.cs",
+              "ViewState": "AgIAAHwAAAAAAAAAAIAxwJEAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-07T10:09:19.535Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Carrito.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lauty\\Documents\\CYG\\TiendaCYG\\CapaPresentacionTienda\\Views\\Tienda\\Carrito.cshtml",
+              "RelativeDocumentMoniker": "CapaPresentacionTienda\\Views\\Tienda\\Carrito.cshtml",
+              "ToolTip": "C:\\Users\\Lauty\\Documents\\CYG\\TiendaCYG\\CapaPresentacionTienda\\Views\\Tienda\\Carrito.cshtml",
+              "RelativeToolTip": "CapaPresentacionTienda\\Views\\Tienda\\Carrito.cshtml",
+              "ViewState": "AgIAAJwAAAAAAAAAAAAAALAAAABUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-07T10:08:32.944Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Producto.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lauty\\Documents\\CYG\\TiendaCYG\\CapaPresentacionTienda\\Views\\Mantenedor\\Producto.cshtml",
+              "RelativeDocumentMoniker": "CapaPresentacionTienda\\Views\\Mantenedor\\Producto.cshtml",
+              "ToolTip": "C:\\Users\\Lauty\\Documents\\CYG\\TiendaCYG\\CapaPresentacionTienda\\Views\\Mantenedor\\Producto.cshtml",
+              "RelativeToolTip": "CapaPresentacionTienda\\Views\\Mantenedor\\Producto.cshtml",
+              "ViewState": "AgIAAIsBAAAAAAAAAAAAAJ4BAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-07T09:58:27.196Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CN_Usuarios.cs",
+              "DocumentMoniker": "C:\\Users\\Lauty\\Documents\\CYG\\TiendaCYG\\CapaNegocio\\CN_Usuarios.cs",
+              "RelativeDocumentMoniker": "CapaNegocio\\CN_Usuarios.cs",
+              "ToolTip": "C:\\Users\\Lauty\\Documents\\CYG\\TiendaCYG\\CapaNegocio\\CN_Usuarios.cs",
+              "RelativeToolTip": "CapaNegocio\\CN_Usuarios.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFsAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-07T09:14:30.972Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CD_Usuarios.cs",
+              "DocumentMoniker": "C:\\Users\\Lauty\\Documents\\CYG\\TiendaCYG\\CapaDatos\\CD_Usuarios.cs",
+              "RelativeDocumentMoniker": "CapaDatos\\CD_Usuarios.cs",
+              "ToolTip": "C:\\Users\\Lauty\\Documents\\CYG\\TiendaCYG\\CapaDatos\\CD_Usuarios.cs",
+              "RelativeToolTip": "CapaDatos\\CD_Usuarios.cs",
+              "ViewState": "AgIAAF0AAAAAAAAAAIAywI8AAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-07T09:12:12.043Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\Lauty\\Documents\\CYG\\TiendaCYG\\CapaPresentacionTienda\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "CapaPresentacionTienda\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\Lauty\\Documents\\CYG\\TiendaCYG\\CapaPresentacionTienda\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "CapaPresentacionTienda\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAowDcAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-07T09:09:41.336Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Usuarios.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lauty\\Documents\\CYG\\TiendaCYG\\CapaPresentacionTienda\\Views\\Home\\Usuarios.cshtml",
+              "RelativeDocumentMoniker": "CapaPresentacionTienda\\Views\\Home\\Usuarios.cshtml",
+              "ToolTip": "C:\\Users\\Lauty\\Documents\\CYG\\TiendaCYG\\CapaPresentacionTienda\\Views\\Home\\Usuarios.cshtml",
+              "RelativeToolTip": "CapaPresentacionTienda\\Views\\Home\\Usuarios.cshtml",
+              "ViewState": "AgIAADkAAAAAAAAAAAAvwEkAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-07T09:09:03.442Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AccesoController.cs",
+              "DocumentMoniker": "C:\\Users\\Lauty\\Documents\\CYG\\TiendaCYG\\CapaPresentacionTienda\\Controllers\\AccesoController.cs",
+              "RelativeDocumentMoniker": "CapaPresentacionTienda\\Controllers\\AccesoController.cs",
+              "ToolTip": "C:\\Users\\Lauty\\Documents\\CYG\\TiendaCYG\\CapaPresentacionTienda\\Controllers\\AccesoController.cs",
+              "RelativeToolTip": "CapaPresentacionTienda\\Controllers\\AccesoController.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAiwFwAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-07T09:15:44.565Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

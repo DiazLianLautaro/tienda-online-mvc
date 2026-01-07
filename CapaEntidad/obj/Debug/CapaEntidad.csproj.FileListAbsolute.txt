@@ -4,3 +4,9 @@ C:\Users\Lauty\Documents\CursoCodigoEstudiante\CursoMVC\CapaEntidad\obj\Debug\Ca
 C:\Users\Lauty\Documents\CursoCodigoEstudiante\CursoMVC\CapaEntidad\obj\Debug\CapaEntidad.csproj.CoreCompileInputs.cache
 C:\Users\Lauty\Documents\CursoCodigoEstudiante\CursoMVC\CapaEntidad\obj\Debug\CapaEntidad.dll
 C:\Users\Lauty\Documents\CursoCodigoEstudiante\CursoMVC\CapaEntidad\obj\Debug\CapaEntidad.pdb
+C:\Users\Lauty\Documents\CYG\TiendaCYG\CapaEntidad\bin\Debug\CapaEntidad.dll
+C:\Users\Lauty\Documents\CYG\TiendaCYG\CapaEntidad\bin\Debug\CapaEntidad.pdb
+C:\Users\Lauty\Documents\CYG\TiendaCYG\CapaEntidad\obj\Debug\CapaEntidad.csproj.AssemblyReference.cache
+C:\Users\Lauty\Documents\CYG\TiendaCYG\CapaEntidad\obj\Debug\CapaEntidad.csproj.CoreCompileInputs.cache
+C:\Users\Lauty\Documents\CYG\TiendaCYG\CapaEntidad\obj\Debug\CapaEntidad.dll
+C:\Users\Lauty\Documents\CYG\TiendaCYG\CapaEntidad\obj\Debug\CapaEntidad.pdb

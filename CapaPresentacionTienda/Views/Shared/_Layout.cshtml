@@ -1,40 +1,153 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap Icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+    <!-- SimpleLightbox plugin CSS-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="~/Content/styles.css" rel="stylesheet" />
 </head>
-<body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-        <div class="container">
-            @Html.ActionLink("Nombre de la aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar navegación" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+<body class="d-flex flex-column min-vh-100 bg-dark">
+    <!-- Navegación -->
+    @*<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand ps-3 sb-sidenav-light bg-light " href="@Url.Action("Index","Tienda")">Mi Tienda</a>
+            <button class="mb-2 navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">*@
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+
+
+                @*<ul class="navbar-nav ms-auto my-2 my-lg-0" ">*@
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    @*<li class="nav-item">
+                            <a class="nav-link sb-sidenav-light bg-light" aria-current="page" href="@Url.Action("Index","Tienda")#sInicio">Inicio</a>
+                        </li>
+                        <li>
+                            <a class="nav-link sb-sidenav-light bg-light" aria-current="page" href="@Url.Action("Index", "Tienda")#sProductos">Catálogo</a>
+                        </li>*@
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="@Url.Action("Index","Tienda")#sInicio">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="@Url.Action("Index", "Tienda")#sProductos">Catálogo</a>
+                    </li>
+
                 </ul>
+                <form class="d-flex">
+
+                    @if (Session["Usuario"] == null)
+                    {
+                        <a class="btn navbar-brand" aria-current="page" href="@Url.Action("Index","Acceso")"><i class="fas fa-sign-out-alt me-1"></i>Iniciar Sesión</a>
+                    }
+                    else
+                    {
+                        
+                        <a class="btn navbar-brand text-secondary link-primary"
+                           href="@Url.Action("Carrito","Tienda")">
+                            <i class="fas fa-shopping-cart me-1"></i>
+                            Cart
+                            <span class="badge bg-secondary ms-1 rounded-pill" id="cantidadCarrito">0</span>
+                        </a>
+
+                        <ul class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0">
+                            <li class="nav-item dropdown">
+                                <a class="btn navbar-brand text-secondary link-primary" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+                                    <li><a class="dropdown-item" href="#!"><b>@(((CapaEntidad.Usuario)Session["Usuario"]).Nombre)</b></a></li> @* Nombre de usuario *@
+
+                                    @if (((CapaEntidad.Usuario)Session["Usuario"]).EsAdmin == true)
+                                    {
+                                        <li class="bg-success"><p class="dropdown-item-text bg-success btn-group ms-3 px-5 m-0">Admin</p></li>
+                                        <li><a class="dropdown-item" href="@Url.Action("Index","Home")">Gestión</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li class="bg-info"><p class="dropdown-item-text bg-info btn-group ms-3 px-5 m-0">Usuario</p></li>
+                                    }
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li><a class="dropdown-item" href="@Url.Action("MisCompras","Acceso")">Mis Compras</a></li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li><a class="dropdown-item" href="@Url.Action("CerrarSesion","Acceso")">Cerrar Sesion</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    }
+
+                </form>
             </div>
         </div>
     </nav>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
-        </footer>
-    </div>
+    @RenderBody()
 
+
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <!-- Bootstrap core JS (5)-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SimpleLightbox plugin JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="~/Scripts/scriptsb.js"></script>
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <!-- * *                               SB Forms JS                               * *-->
+    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+
+
 </body>
 </html>
+
+    <script>
+
+        $(document).ready(function () {
+            MonstrarCantidadCarrito();
+        })
+
+        function MonstrarCantidadCarrito() {
+
+            if ($("#cantidadCarrito").length > 0) {
+
+                jQuery.ajax({
+                    url: '@Url.Action("CantidadEnCarrito", "Tienda")',
+                    type: "GET",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data){
+
+                        $("#cantidadCarrito").text(data.cantidad)
+                    }
+                });
+            }
+        }
+
+    </script>
+
+<style>
+    a.link-primary:hover .badge {
+        background-color: var(--bs-primary);
+    }
+
+</style>

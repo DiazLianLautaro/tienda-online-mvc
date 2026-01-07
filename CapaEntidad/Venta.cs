@@ -9,15 +9,11 @@ namespace CapaEntidad
     public class Venta
     {
         public int IdVenta { get; set; }
-        public int IdCliente { get; set; }
-        public int TotalProducto { get; set; }
-        public decimal MontoTotal { get; set; }
-        public string Contacto { get; set; }
-        public string IdDistrito { get; set; }
-        public string Telefono { get; set; }
-        public string Dirrecion { get; set; }
-        public string FechaTexto { get; set; }
+        public int IdUsuario { get; set; }
         public string IdTransaccion { get; set; }
+        public string FechaTexto { get; set; }
+        public decimal MontoTotal { get; set; }
+        public string Direccion { get; set; }
         public List<DetalleVenta> oDetalleVenta { get; set; }
     }
 }

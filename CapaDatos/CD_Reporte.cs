@@ -60,8 +60,6 @@ namespace CapaDatos
         }
 
 
-
-
         public DashBoard VerDashBoard()
         {
             DashBoard objeto = new DashBoard();
@@ -83,7 +81,7 @@ namespace CapaDatos
 
                             objeto = new DashBoard()
                             {
-                                TotalCliente = Convert.ToInt32(dr["TotalCliente"]),
+                                TotalUsuario = Convert.ToInt32(dr["TotalCliente"]),
                                 TotalProducto = Convert.ToInt32(dr["TotalProducto"]),
                                 TotalVenta = Convert.ToInt32(dr["TotalVenta"]),
                             };
@@ -91,16 +89,11 @@ namespace CapaDatos
                         }
                     }
                 }
-
-
             }
             catch
             {
                 objeto = new DashBoard();
             }
-
-
-
             return objeto;
         }
     }

@@ -12,9 +12,9 @@ namespace CapaNegocio
     {
         private CD_Categoria objCapaDato = new CD_Categoria();
 
-        public List<Categoria> Listar()
+        public List<Categoria> Listar(bool soloActivos)
         {
-            return objCapaDato.Listar();
+            return objCapaDato.Listar(soloActivos);
         }
 
         public int Registrar(Categoria obj, out string Mensaje)

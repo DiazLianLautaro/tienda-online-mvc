@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace CapaDatos
@@ -19,7 +21,7 @@ namespace CapaDatos
             {
                 using (SqlConnection oConexion = new SqlConnection(Conexion.cn))
                 {
-                    string query = "select IdMarca, Descripcion, Activo From Marca";
+                    string query = "select Id, Descripcion, Activo From Marca";
 
                     SqlCommand cmd = new SqlCommand(query, oConexion);
                     cmd.CommandType = CommandType.Text;
@@ -34,7 +36,7 @@ namespace CapaDatos
                             list.Add(
                                 new Marca()
                                 {
-                                    IdMarca = Convert.ToInt32(dr["IdMarca"]),
+                                    IdMarca = Convert.ToInt32(dr["Id"]),
                                     Descripcion = dr["Descripcion"].ToString(),
                                     Activo = Convert.ToBoolean(dr["Activo"])
                                 }
@@ -150,5 +152,50 @@ namespace CapaDatos
         }
 
 
+        public List<Marca> ListarMarcaPorCategoria(int idcategoria)
+        {
+            List<Marca> list = new List<Marca>();
+
+            try
+            {
+                using (SqlConnection oConexion = new SqlConnection(Conexion.cn))
+                {
+                    StringBuilder sb = new StringBuilder();
+
+                    sb.AppendLine("select distinct m.Id, m.Descripcion from PRODUCTO p");
+                    sb.AppendLine("inner join CATEGORIA c on c.Id = p.CategoriaId");
+                    sb.AppendLine("inner join MARCA m on m.Id = p.MarcaId and m.Activo = 1");
+                    sb.AppendLine("where c.Id = iif(@idcategoria = 0, c.Id, @idcategoria)");
+
+
+                    SqlCommand cmd = new SqlCommand(sb.ToString(), oConexion);
+                    cmd.Parameters.AddWithValue("@idcategoria", idcategoria);
+                    cmd.CommandType = CommandType.Text;
+
+                    oConexion.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+
+                            list.Add(
+                                new Marca()
+                                {
+                                    IdMarca = Convert.ToInt32(dr["Id"]),
+                                    Descripcion = dr["Descripcion"].ToString()
+                                }
+
+                                );
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                list = new List<Marca>();
+            }
+            return list;
+        }
     }
 }

@@ -19,6 +19,7 @@ namespace CapaPresentacionAdmin
                        "~/Scripts/sweetalert.min.js",
                        "~/Scripts/jquery.validate.js",
                        "~/Scripts/jquery-ui-1-14.1.js",
+                       "~/Scripts/modernizr.js",
                        "~/Scripts/scripts.js"));
 
             //bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(

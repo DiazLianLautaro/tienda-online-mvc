@@ -14,7 +14,7 @@ namespace CapaDatos
 {
     public class CD_Productos
     {
-        public List<Producto> Listar()
+        public List<Producto> Listar(bool soloActivos)
         {
             List<Producto> list = new List<Producto>();
 
@@ -25,13 +25,17 @@ namespace CapaDatos
                     //Es para leer la consulta con saltos de linea.
                     StringBuilder sb = new StringBuilder();
 
-                    sb.AppendLine("select IdProducto, Nombre, p.Descripcion, ");
-                    sb.AppendLine("m.IdMarca, m.Descripcion[DesMarca], ");
-                    sb.AppendLine("c.IdCategoria, c.Descripcion[DesCate], ");
-                    sb.AppendLine("Precio, Stock, RutaImagen, NombreImagen, p.Activo");
-                    sb.AppendLine("from PRODUCTO p");
-                    sb.AppendLine("inner join MARCA m on m.IdMarca = p.IdMarca");
-                    sb.AppendLine("inner join CATEGORIA c on c.IdCategoria = p.IdCategoria");
+                    sb.AppendLine("select p.Id, Nombre, p.Descripcion, ");
+                    sb.AppendLine("m.Id[IdMarca], m.Descripcion[DesMarca], ");
+                    sb.AppendLine("c.Id[IdCate], c.Descripcion[DesCate], ");
+                    sb.AppendLine("Stock, dp.PrecioVenta[PrecioVenta], dp.PrecioCompra[PrecioCompra], dp.CantidadCompra, RutaImagen, NombreImagen, p.Activo ");
+                    sb.AppendLine("from PRODUCTO p ");
+                    sb.AppendLine("inner join MARCA m on m.Id = p.MarcaId ");
+                    sb.AppendLine("inner join CATEGORIA c on c.Id = p.CategoriaId ");
+                    sb.AppendLine("inner join DetalleProducto dp on dp.ProductoId = p.Id ");
+
+                    if(soloActivos)
+                        sb.AppendLine("where p.Activo = 1 ");
 
 
                     SqlCommand cmd = new SqlCommand(sb.ToString(), oConexion);
@@ -47,13 +51,18 @@ namespace CapaDatos
                             list.Add(
                                 new Producto()
                                 {
-                                    IdProducto = Convert.ToInt32(dr["IdProducto"]),
+                                    IdProducto = Convert.ToInt32(dr["Id"]),
                                     Nombre = dr["Nombre"].ToString(),
                                     Descripcion = dr["Descripcion"].ToString(),
                                     oMarca = new Marca() { IdMarca = Convert.ToInt32(dr["IdMarca"]), Descripcion = dr["DesMarca"].ToString() },
-                                    oCategoria = new Categoria() { IdCategoria = Convert.ToInt32(dr["IdCategoria"]), Descripcion = dr["DesCate"].ToString() },
-                                    Precio = Convert.ToDecimal(dr["Precio"]),
+                                    oCategoria = new Categoria() { IdCategoria = Convert.ToInt32(dr["IdCate"]), Descripcion = dr["DesCate"].ToString() },
                                     Stock = Convert.ToInt32(dr["Stock"]),
+                                    oDetalle = new DetalleProducto() { 
+                                        PrecioVenta = Convert.ToDecimal(dr["PrecioVenta"]), 
+                                        PrecioCompra = Convert.ToDecimal(dr["PrecioCompra"]), 
+                                        CantidadCompra = Convert.ToInt32(dr["CantidadCompra"])
+                                    },
+
                                     RutaImagen = dr["RutaImagen"].ToString(),
                                     NombreImagen = dr["NombreImagen"].ToString(),
                                     Activo = Convert.ToBoolean(dr["Activo"])
@@ -71,8 +80,69 @@ namespace CapaDatos
             return list;
         }
 
+        public Producto Detalle(int Id)
+        {
+            Producto prod = new Producto();
+
+            try
+            {
+                using (SqlConnection oConexion = new SqlConnection(Conexion.cn))
+                {
+                    //Es para leer la consulta con saltos de linea.
+                    StringBuilder sb = new StringBuilder();
+
+                    sb.AppendLine("select p.Id, Nombre, p.Descripcion, ");
+                    sb.AppendLine("m.Id[IdMarca], m.Descripcion[DesMarca], ");
+                    sb.AppendLine("c.Id[IdCate], c.Descripcion[DesCate], ");
+                    //sb.AppendLine("Stock, dp.PrecioVenta[Precio], RutaImagen, NombreImagen, p.Activo ");
+                    sb.AppendLine("Stock, dp.PrecioVenta[PrecioVenta], dp.PrecioCompra[PrecioCompra], dp.CantidadCompra, RutaImagen, NombreImagen, p.Activo ");
+                    sb.AppendLine("from PRODUCTO p ");
+                    sb.AppendLine("inner join MARCA m on m.Id = p.MarcaId ");
+                    sb.AppendLine("inner join CATEGORIA c on c.Id = p.CategoriaId ");
+                    sb.AppendLine("inner join DetalleProducto dp on dp.ProductoId = p.Id ");
+                    sb.AppendLine("where p.Id = " + Id);
 
 
+                    SqlCommand cmd = new SqlCommand(sb.ToString(), oConexion);
+                    cmd.CommandType = CommandType.Text;
+
+                    oConexion.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            prod = new Producto()
+                            {
+                                IdProducto = Convert.ToInt32(dr["Id"]),
+                                Nombre = dr["Nombre"].ToString(),
+                                Descripcion = dr["Descripcion"].ToString(),
+                                oMarca = new Marca() { IdMarca = Convert.ToInt32(dr["IdMarca"]), Descripcion = dr["DesMarca"].ToString() },
+                                oCategoria = new Categoria() { IdCategoria = Convert.ToInt32(dr["IdCate"]), Descripcion = dr["DesCate"].ToString() },
+                                Stock = Convert.ToInt32(dr["Stock"]),
+                                //oDetalle = new DetalleProducto() { PrecioVenta = Convert.ToDecimal(dr["Precio"]) },
+                                oDetalle = new DetalleProducto()
+                                {
+                                    PrecioVenta = Convert.ToDecimal(dr["PrecioVenta"]),
+                                    PrecioCompra = Convert.ToDecimal(dr["PrecioCompra"]),
+                                    CantidadCompra = Convert.ToInt32(dr["CantidadCompra"])
+                                },
+                                RutaImagen = dr["RutaImagen"].ToString(),
+                                NombreImagen = dr["NombreImagen"].ToString(),
+                                Activo = Convert.ToBoolean(dr["Activo"])
+                            };
+                        }
+                    }
+                }
+                
+
+            }
+            catch
+            {
+                prod = new Producto();
+            }
+            return prod;
+        }
 
         public int Registrar(Producto obj, out string Mensaje)
         {
@@ -87,9 +157,11 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("Descripcion", obj.Descripcion);
                     cmd.Parameters.AddWithValue("IdMarca", obj.oMarca.IdMarca);
                     cmd.Parameters.AddWithValue("IdCategoria", obj.oCategoria.IdCategoria);
-                    cmd.Parameters.AddWithValue("Precio", obj.Precio);
                     cmd.Parameters.AddWithValue("Stock", obj.Stock);
                     cmd.Parameters.AddWithValue("Activo", obj.Activo);
+                    cmd.Parameters.AddWithValue("PrecioCompra", obj.oDetalle.PrecioCompra);
+                    cmd.Parameters.AddWithValue("PrecioVenta", obj.oDetalle.PrecioVenta);
+                    cmd.Parameters.AddWithValue("CantidadCompra", obj.oDetalle.CantidadCompra);
                     cmd.Parameters.Add("Resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
                     cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -110,8 +182,6 @@ namespace CapaDatos
             return idautogenerado;
         }
 
-
-
         public bool Editar(Producto obj, out string Mensaje)
         {
             bool resultado = false;
@@ -126,9 +196,11 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("Descripcion", obj.Descripcion);
                     cmd.Parameters.AddWithValue("IdMarca", obj.oMarca.IdMarca);
                     cmd.Parameters.AddWithValue("IdCategoria", obj.oCategoria.IdCategoria);
-                    cmd.Parameters.AddWithValue("Precio", obj.Precio);
                     cmd.Parameters.AddWithValue("Stock", obj.Stock);
                     cmd.Parameters.AddWithValue("Activo", obj.Activo);
+                    cmd.Parameters.AddWithValue("PrecioCompra", obj.oDetalle.PrecioCompra);
+                    cmd.Parameters.AddWithValue("PrecioVenta", obj.oDetalle.PrecioVenta);
+                    cmd.Parameters.AddWithValue("CantidadCompra", obj.oDetalle.CantidadCompra);
                     cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -159,7 +231,7 @@ namespace CapaDatos
             {
                 using (SqlConnection oconexion = new SqlConnection(Conexion.cn))
                 {
-                    string query = "update PRODUCTO set RutaImagen = @rutaimagen, NombreImagen = @nombreimagen where IdProducto = @idproducto";
+                    string query = "update PRODUCTO set RutaImagen = @rutaimagen, NombreImagen = @nombreimagen where Id = @idproducto";
                                     
                     SqlCommand cmd = new SqlCommand(query, oconexion);
                     cmd.Parameters.AddWithValue("@rutaimagen", oProducto.RutaImagen);
@@ -190,7 +262,7 @@ namespace CapaDatos
             return resultado;
         }
 
-
+        //Eliminación Definitiva mientras no esté relacionado a una venta
         public bool Eliminar(int id, out string Mensaje)
         {
             bool resultado = false;
@@ -220,5 +292,6 @@ namespace CapaDatos
             return resultado;
         }
 
+        
     }
 }

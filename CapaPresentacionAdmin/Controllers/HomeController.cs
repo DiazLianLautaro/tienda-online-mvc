@@ -14,6 +14,7 @@ using System.Web.Services.Description;
 
 namespace CapaPresentacionAdmin.Controllers
 {
+    [Authorize] //no podrá acceder si no está autorizado (O sea debe iniciar sesión)
     public class HomeController : Controller
     {
         public ActionResult Index()
