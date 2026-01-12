@@ -22,6 +22,23 @@ namespace CapaPresentacionTienda.Controllers
             return View();
         }
 
+        [ValidarSesion]
+        public ActionResult Carrito()
+        {
+            return View();
+        }
+
+        public ActionResult Blog()
+        {
+            return View();
+        }
+
+        [ValidarSesion]
+        public ActionResult Contacto()
+        {
+            return View();
+        }
+
         public ActionResult DetalleProducto(int idproducto = 0)
         {
             Producto oProducto = new Producto();
@@ -39,7 +56,7 @@ namespace CapaPresentacionTienda.Controllers
         }
 
 
-
+        // -- Index --
         [HttpGet]
         public JsonResult ListaCategorias()
         {
@@ -61,7 +78,7 @@ namespace CapaPresentacionTienda.Controllers
         }
 
         [HttpPost]
-        public JsonResult ListarProductos(int idcategoria, int idmarca)
+        public JsonResult ListarProductos(int idcategoria, int idmarca, int pagina, int cantidad)
         {
             List<Producto> lista = new List<Producto>();
 
@@ -88,7 +105,14 @@ namespace CapaPresentacionTienda.Controllers
                 p.Stock > 0 && p.Activo == true
             ).ToList();
 
-            var jsonResult = Json(new { data = lista}, JsonRequestBehavior.AllowGet);
+            int totalRegistros = lista.Count();
+
+            lista = lista
+                .Skip((pagina - 1) * cantidad)
+                .Take(cantidad)
+                .ToList();
+
+            var jsonResult = Json(new { data = lista, total = totalRegistros }, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;
 
             return jsonResult;
@@ -118,6 +142,7 @@ namespace CapaPresentacionTienda.Controllers
             
             return Json(new { respuesta =  respuesta, mensaje = mensaje}, JsonRequestBehavior.AllowGet);
         }
+
 
 
         // --- Carrito ---
@@ -189,6 +214,38 @@ namespace CapaPresentacionTienda.Controllers
         }
 
 
+        // -- Contacto --
+        [HttpPost]
+        [ValidarSesion]
+        public ActionResult Contacto(string asunto, string mensaje)
+        {
+            Usuario oUsuario = new Usuario();
+            string correo = string.Empty;
+
+            if (((Usuario)Session["Usuario"]) != null)
+            {
+                correo = ((Usuario)Session["Usuario"]).Email;
+
+                bool resultado = new CN_Usuarios().CorreoContacto(correo, asunto, mensaje);
+
+                if (resultado)
+                {
+                    ViewBag.Error = null;
+                    return View(resultado);
+                }
+                else
+                {
+                    ViewBag.Error = "Hubo un error al intentar enviar el correo";
+                    return View();
+                }
+            }
+            else
+            {
+                ViewBag.Error = "No se encontró un Usuario";
+                return View();
+            }
+        }
+
 
         //--- UBICACION ---
         [HttpPost]
@@ -221,13 +278,7 @@ namespace CapaPresentacionTienda.Controllers
             return Json(new { lista = oLista }, JsonRequestBehavior.AllowGet);
         }
 
-
-        //Vista
-        public ActionResult Carrito() 
-        {
-            return View();
-        }
-
+     
 
         //--- Pago ---
         [HttpPost]

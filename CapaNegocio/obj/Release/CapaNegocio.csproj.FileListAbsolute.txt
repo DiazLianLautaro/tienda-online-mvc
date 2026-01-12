@@ -1,0 +1,11 @@
+C:\Users\Lauty\Documents\CYG\TiendaCYG\CapaNegocio\bin\Release\CapaNegocio.dll
+C:\Users\Lauty\Documents\CYG\TiendaCYG\CapaNegocio\bin\Release\CapaNegocio.pdb
+C:\Users\Lauty\Documents\CYG\TiendaCYG\CapaNegocio\bin\Release\CapaDatos.dll
+C:\Users\Lauty\Documents\CYG\TiendaCYG\CapaNegocio\bin\Release\CapaEntidad.dll
+C:\Users\Lauty\Documents\CYG\TiendaCYG\CapaNegocio\bin\Release\CapaDatos.pdb
+C:\Users\Lauty\Documents\CYG\TiendaCYG\CapaNegocio\bin\Release\CapaEntidad.pdb
+C:\Users\Lauty\Documents\CYG\TiendaCYG\CapaNegocio\obj\Release\CapaNegocio.csproj.AssemblyReference.cache
+C:\Users\Lauty\Documents\CYG\TiendaCYG\CapaNegocio\obj\Release\CapaNegocio.csproj.CoreCompileInputs.cache
+C:\Users\Lauty\Documents\CYG\TiendaCYG\CapaNegocio\obj\Release\CapaNego.81B9D119.Up2Date
+C:\Users\Lauty\Documents\CYG\TiendaCYG\CapaNegocio\obj\Release\CapaNegocio.dll
+C:\Users\Lauty\Documents\CYG\TiendaCYG\CapaNegocio\obj\Release\CapaNegocio.pdb

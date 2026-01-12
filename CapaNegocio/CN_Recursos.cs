@@ -49,7 +49,7 @@ namespace CapaNegocio
                 {
 
                     //programpruebas47@gmail.com
-                    mail.From = new MailAddress("norespoder47@demo.com");  //desde quien (correo ficticio sin dominio en gmail por ejemplo)
+                    mail.From = new MailAddress("norespoder47@demo.com");  //desde quien (correo ficticio sin dominio)
                     mail.To.Add(correo);  //a quien
                     mail.Subject = asunto;
                     mail.Body = mensaje;
@@ -74,6 +74,42 @@ namespace CapaNegocio
             }
             return resultado;
         }
+
+        public static bool EnviarCorreoContacto(string correo, string asunto, string mensaje)
+        {
+            bool resultado = false;
+
+            try
+            {
+                using (MailMessage mail = new MailMessage())
+                using (var smtp = new SmtpClient())
+                {
+                    mail.From = new MailAddress(correo);  //desde quien 
+                    mail.To.Add("norespoder47@demo.com");                        //a quien (Pendiente: Pedir correo)
+                    mail.Subject = asunto;
+                    mail.Body = mensaje;
+                    mail.IsBodyHtml = true;
+
+
+                    smtp.UseDefaultCredentials = false; //IMPORTANTE debe ir antes de las credenciales 
+                    smtp.Host = "sandbox.smtp.mailtrap.io";
+                    smtp.Port = 2525;
+                    //smtp.Port = 465;
+                    smtp.EnableSsl = true; //Si o si para Mailtrap
+                    smtp.Credentials = new NetworkCredential("dc2253c6c3f535", "e8e5991b265b68");
+
+                    smtp.Send(mail);
+                }
+                
+                resultado = true;
+            }
+            catch (Exception ex)
+            {
+                resultado = false;
+            }
+            return resultado;
+        }
+
 
         public static string ConvertirBase64(string ruta, out bool conversion)
         {

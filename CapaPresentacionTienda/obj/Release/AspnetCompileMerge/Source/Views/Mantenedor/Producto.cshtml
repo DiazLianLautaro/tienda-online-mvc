@@ -1,0 +1,627 @@
+﻿
+@{
+    ViewBag.Title = "Producto";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item active">Productos</li>
+</ol>
+
+
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-boxes me-1"></i> Lista de Productos
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <button type="button" class="btn btn-success" onclick="abrirModal(null)">Crear Nuevo</button>
+                </div>
+            </div>
+
+            <hr />
+
+            <table id="tabla" class="display cell-border" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Marca</th>
+                        <th>Categoria</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Activo</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+<!-- Modal -->
+<div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" data-bs-backdrop="static">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Producto</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <input id="txtid" type="hidden" value="0" />
+
+                @* Formulario del modal *@
+                <form id="contenedor" class="row">
+
+                    <div class="col-sm-3">
+                        <div class="mb-2">
+                            <img id="imgProducto" height="197" width="200" class="border rounded mx-auto d-block img-fluid" />
+                        </div>
+                        <div class="mb-2">
+                            <label>Subir Imagen</label>
+                            <input class="form-control" type="file" id="fileProducto" accept="image/png, image/jpg, image/jpeg" onchange="mostrarImagen(this)" />
+                        </div>
+                        @*<div class="mb-2">
+                            <label>Link de Imagen</label>
+                            <input class="form-control" type="text" id="linkProducto" onchange="mostrarImagenlink(this)" />
+                        </div>*@
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="mb-3">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="txtNombre" name="Nombre" autocomplete="off" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Descripcion</label>
+                            <textarea type="text" class="form-control" id="txtDescripcion" name="Descripcion" style="height:125px; resize:none" autocomplete="off"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="mb-3">
+                            <label class="form-label">Marca</label>
+                            <select id="cboMarca" class="form-select"></select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Categoria</label>
+                            <select id="cboCategoria" class="form-select"></select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Precio de Compra</label>
+                            <input type="text" class="form-control" id="txtPrecioCompra" name="PrecioCompra" autocomplete="off" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Precio de Venta</label>
+                            <input type="text" class="form-control" id="txtPrecioVenta" name="PrecioVenta" autocomplete="off" />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="mb-3">
+                            <label class="form-label">Cantidad de Compra</label>
+                            <input type="number" class="form-control" id="txtCantidadCompra" name="CantidadCompra" autocomplete="off" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Stock</label>
+                            <input type="number" class="form-control" id="txtStock" name="Stock" autocomplete="off" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Activo</label>
+                            <select id="cboActivo" class="form-select">
+                                <option value="1">Si</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </form>
+
+
+                @* Mensaje de alerta *@
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div id="MensajeError" class="alert alert-danger" role="alert">
+                            @*simple danger message*@
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="Guardar()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+@section scripts{
+    <script>
+
+        @*Estructura básica de un ajax (APUNTE)
+
+            jQuery.ajax({
+                url: '@Url.Action("Metodo","Controller")',
+                type: "GET",
+                data: null,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data){
+                    console.log(data)
+                },
+                error: function (error) {
+                    console.log(error)
+                },
+                beforeSend: function (){
+
+                }
+            });
+        *@
+
+        var tabladata;
+        var filaSeleccionada;
+
+        //imagen del Modal File
+        function mostrarImagen(input) {
+            if (input.files) {
+                document.getElementById("imgProducto").src = "";
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $("#imgProducto").attr("src",e.target.result).width(200).height(197)
+                }
+
+                //seleciona solo el primer elemento
+                reader.readAsDataURL(input.files[0])
+            }
+        }
+
+        //imagen del Modal Link
+        function mostrarImagenlink(input) {
+            document.getElementById("imgProducto").src = "";
+            const url = input.value;
+
+            if (url) {
+                document.getElementById("imgProducto").src = url;
+            }
+        }
+
+
+        //---Lista de Productos---
+        tabladata = $("#tabla").DataTable({
+            responsive: true,
+            ordering: false,
+            "ajax": {
+                url: '@Url.Action("ListarProductos", "Mantenedor")',
+                type: "GET",
+                dataType: "json"
+            },
+            //Completa las columnas en el tbody con datos.
+            "columns": [
+                { "data": "Nombre" },
+                {
+                    "data": "Descripcion",
+                    "render": function (data) {
+                        return `<div class="descripcion-corta" title="${data}">${data}</div>`;
+                    }
+                },
+                {
+                    "data": "oMarca", "render": function (data) {
+                        return data.Descripcion
+                    }
+                },
+                {
+                    "data": "oCategoria", "render": function (data) {
+                        return data.Descripcion
+                    }
+                },
+                {
+                    "data": "oDetalle", "render": function (data) {
+                        return "$" +data.PrecioVenta
+                    }
+                },
+                { "data": "Stock" },
+                {
+                    "data": "Activo", "render": function (valor) {
+                        if (valor) {
+                            return '<span class="badge text-bg-success">Si</span>'
+                        } else {
+                            return '<span class="badge text-bg-danger">No</span>'
+                        }
+                    }
+                },
+                //Botones Editar Eliminar.
+                {
+                    "defaultContent": '<button type="button" class="btn btn-primary btn-sm btn-editar"><i class="fas fa-pen me-1"></i></button>' +
+                                    '<button type="button" class="btn btn-danger btn-sm ms-2 btn-eliminar"><i class="fas fa-trash me-1"></i></button>' +
+                                    '<button type="button" class="btn btn-outline-success btn-sm ms-2 btn-detalle"><i class="fas fa-book me-1"></i></button>',
+                    "orderable": false,
+                    "searchable": false, /*Para no buscarlo en la barra de búsqueda*/
+                    "width": "120px"
+                }
+            ],
+            language: {
+                url: '//cdn.datatables.net/plug-ins/2.3.4/i18n/es-ES.json'
+            }
+        });
+
+
+        //Cargar Marcas en el select del Modal
+        jQuery.ajax({
+            url: '@Url.Action("ListarMarcas", "Mantenedor")',
+            type: "GET",
+            data: null,
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data){
+
+                console.log(data)
+
+                //Opcion por defecto "Seleccionar"
+                $("<option>").attr({ "value":"0", "disabled":"true" }).text("Seleccionar").appendTo("#cboMarca")
+
+                //Lista de elementos a mostrar
+                $.each(data.data, function (index, item) {
+
+                    $("<option>").attr({ "value": item.IdMarca }).text(item.Descripcion).appendTo("#cboMarca")
+                })
+
+
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        });
+
+
+        //Cargar Categorias en el select del Modal
+        jQuery.ajax({
+            url: '@Url.Action("ListarCategorias", "Mantenedor")',
+            type: "GET",
+            data: null,
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data){
+
+                //Opcion por defecto "Seleccionar"
+                $("<option>").attr({ "value":"0", "disabled":"true" }).text("Seleccionar").appendTo("#cboCategoria")
+
+                //Lista de elementos a mostrar
+                $.each(data.data, function (index, item) {
+
+                    $("<option>").attr({ "value": item.IdCategoria }).text(item.Descripcion).appendTo("#cboCategoria")
+                })
+
+
+            },
+            error: function (error) {
+                console.log(error)
+            }
+        });
+
+
+        //Validar Campos y Formatos
+
+        jQuery.validator.addMethod("preciodecimal", function (value, element) {
+            return this.optional(element) || /^\d{0,4}(\.\d{0,2})?$/.test(value); //expresion regular
+        }, "El formato correcto del precio es ####.##")
+
+        $("#contenedor").validate({
+            rules:  { //propiedades ' name="" ' del formulario.
+                Nombre: {
+                    required : true
+                },
+                Descripcion: {
+                    required: true
+                },
+                PrecioCompra: {
+                    required: true,
+                    preciodecimal : true
+                },
+                PrecioVenta: {
+                    required: true,
+                    preciodecimal: true
+                },
+                CantidadCompra: {
+                    required: true,
+                    number: true
+                },
+                Stock: {
+                    required: true,
+                    number : true
+                }
+            },
+            messages: {
+                Nombre : "- El campo Nombre es obligatorio",
+                Descripcion: "- El campo Descripcion es obligatorio",
+                PrecioCompra: { required: "- El campo Precio de Compra es obligatorio", preciodecimal: "- El formato correcto del precio es ####.##" },
+                PrecioVenta: { required: "- El campo Precio de Venta es obligatorio", preciodecimal: "- El formato correcto del precio es ####.##" },
+                CantidadCompra: "- El campo Cantidad de Compra es obligatorio",
+                Stock: { required: "- El campo Stock es obligatorio", preciodecimal: "- Debe ingresar solo números" }
+            },
+            errorElement: "div",
+            errorLabelContainer: ".alert-danger"
+        })
+
+
+
+
+
+
+
+        //Abre el Modal
+        function abrirModal(json) {
+
+            //vaciar campos
+            $("#txtid").val(0);
+            $("#imgProducto").removeAttr("src");
+            $("#fileProducto").val("");
+            $("#txtNombre").val("");
+            $("#txtDescripcion").val("");
+            $("#cboMarca").val($("#cboMarca option:first").val());
+            $("#cboCategoria").val($("#cboCategoria option:first").val());
+            $("#txtPrecioCompra").val("");
+            $("#txtPrecioVenta").val("");
+            $("#txtCantidadCompra").val("");
+            $("#txtStock").val("");
+            $("#cboActivo").val(1);
+
+            $("#MensajeError").hide();
+
+            //if != null   EDITAR sino AGREGAR
+            if (json != null) {
+
+                //El # es para hacer referencia a una etiqueta por medio de su atributo Id.
+                $("#txtid").val(json.IdProducto);
+                $("#txtNombre").val(json.Nombre);
+                $("#txtDescripcion").val(json.Descripcion);
+                $("#cboMarca").val(json.oMarca.IdMarca);
+                $("#cboCategoria").val(json.oCategoria.IdCategoria);
+                $("#txtPrecioCompra").val(json.oDetalle.PrecioCompra);
+                $("#txtPrecioVenta").val(json.oDetalle.PrecioVenta);
+                $("#txtCantidadCompra").val(json.oDetalle.CantidadCompra);
+                $("#txtStock").val(json.Stock);
+                $("#cboActivo").val(json.Activo == true ? 1 : 0);
+
+
+                //Mostrar imagen al abrir el Editar
+                 jQuery.ajax({
+                     url: '@Url.Action("ImagenProducto", "Mantenedor")',
+                     type: "POST",
+                     data: JSON.stringify({ id : json.IdProducto}),
+                     dataType: "json",
+                     contentType: "application/json; charset=utf-8",
+                     success: function (data) {
+
+                        $("#imgProducto").LoadingOverlay("hide")
+
+                         if (data.conversion) {
+                             $("#imgProducto").attr({ "src": "data:image/" + data.extension + ";base64," + data.base64 })
+                                 .off("error")
+                                 .on("error", function () {
+                                     $(this).attr("src", "https://repository-images.githubusercontent.com/229240000/2b1bba00-eae1-11ea-8b31-ea57fe8a3f95");
+                                 })
+                         }
+                         else {
+
+                             // 👇 CASO: no hay imagen
+                             $("#imgProducto").attr(
+                                 "src",
+                                 "https://repository-images.githubusercontent.com/229240000/2b1bba00-eae1-11ea-8b31-ea57fe8a3f95"
+                             );
+                         }
+                     },
+                     error: function (error) {
+                         $("#imgProducto").LoadingOverlay("hide")
+                         $("#MensajeError").show();
+                         $("#MensajeError").text("Error al mostrar imagen");
+
+
+                     },
+                     beforeSend: function (){
+                         $("#imgProducto").LoadingOverlay("show") //Mostrar icono/gif de "cargando"
+                     }
+                 });
+
+            }
+
+
+            $("#FormModal").modal("show");
+        }
+
+
+        //Botón de editar
+        $("#tabla tbody").on("click",'.btn-editar', function () {
+
+            filaSeleccionada = $(this).closest("tr");
+
+            var data = tabladata.row(filaSeleccionada).data();
+
+            abrirModal(data)
+        })
+
+        //Botón de eliminar
+        $("#tabla tbody").on("click", '.btn-eliminar', function () {
+
+            var productoSeleccionado = $(this).closest("tr");
+
+            var data = tabladata.row(productoSeleccionado).data();
+
+            swal({
+                title: "¿Estás Seguro/a?",
+                text: "¿Desea Eliminar el Producto?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Si, Seguro/a",
+                cancelButtonText: "No",
+                closeOnConfirm: true
+            },
+                function () {
+                    jQuery.ajax({
+                        url: '@Url.Action("EliminarProducto", "Mantenedor")',
+                        type: "POST",
+                        data: JSON.stringify({ id: data.IdProducto }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+
+                            if (data.resultado) {                           //draw "dibuja" inmediatamente el cambio
+                                tabladata.row(productoSeleccionado).remove().draw();
+                            }
+                            else {
+                                swal("No se pudo eleminar", data.mensaje, "error");
+                            }
+                        },
+                        error: function (error) {
+                            console.log(error)
+                        },
+                        beforeSend: function () {
+
+                        }
+                    });
+
+                    swal("Eliminado!", "El Producto fue eliminado correctamente.", "success");
+                });
+
+        });
+
+        //Botón de detalle
+        $("#tabla tbody").on("click", '.btn-detalle', function () {
+
+            filaSeleccionada = $(this).closest("tr");
+
+            var data = tabladata.row(filaSeleccionada).data();
+
+            window.location.href = '@Url.Action("Detalle", "Mantenedor")' + '?id=' + data.IdProducto;
+        });
+
+
+        //Botón Guardar formulario Modal
+        function Guardar() {
+
+            //si no es true, retorna y corta la ejecución del método.
+            if ( !$("#contenedor").valid()) {
+                return;
+            }
+
+            var imagenSeleccionada = $("#fileProducto")[0].files[0]
+
+            var Producto = {
+
+                IdProducto: $("#txtid").val(),
+                Nombre: $("#txtNombre").val(),
+                Descripcion: $("#txtDescripcion").val(),
+                oMarca: {
+                    IdMarca: $("#cboMarca option:selected").val(),
+                    Descripcion: $("#cboMarca option:selected").text()
+                },
+                oCategoria: {
+                    IdCategoria: $("#cboCategoria option:selected").val(),
+                    Descripcion: $("#cboCategoria option:selected").text()
+                },
+                oDetalle: {
+                    PrecioCompra: $("#txtPrecioCompra").val(),
+                    PrecioVenta: $("#txtPrecioVenta").val(),
+                    CantidadCompra: $("#txtCantidadCompra").val(),
+                },
+                Stock: $("#txtStock").val(),
+                Activo: $("#cboActivo").val() == 1 ? true : false
+            }
+
+
+
+            var request = new FormData();
+
+                    //de la funcion GuardarProducto de MantenedorController, el parametro "objeto"" debe llamarse igual en ambos lados. Igualmente con "archivoImagen"
+            request.append("objeto", JSON.stringify(Producto))
+            request.append("archivoImagen", imagenSeleccionada)
+
+
+            jQuery.ajax({
+                url: '@Url.Action("GuardarProducto", "Mantenedor")',
+                type: "POST",
+                data: request,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+
+                    $(".modal-body").LoadingOverlay("hide");
+
+                    //si id == 0, nuevo Producto
+                    if (Producto.IdProducto == 0) {
+
+                        if (data.idGenerado != 0) {
+
+                            Producto.IdProducto = data.idGenerado;
+                            tabladata.row.add(Producto).draw(false);
+                            $("#FormModal").modal("hide");
+
+                        }
+                        else {
+                            $("#MensajeError").text(data.mensaje);
+                            $("#MensajeError").show();
+                        }
+
+
+
+                    }
+                    //si no, editar Producto
+                    else {
+                        if (data.operacionExitosa) {
+                            tabladata.row(filaSeleccionada).data(Producto).draw(false);
+                            filaSeleccionada = null;
+                            $("#FormModal").modal("hide");
+                        }
+                        else {
+                            $("#MensajeError").text(data.mensaje);
+                            $("#MensajeError").show();
+                        }
+                    }
+                },
+                error: function (error) {
+                    $(".modal-body").LoadingOverlay("hide");
+                    $("#MensajeError").text("Error Ajax " + data.mensaje);
+                    $("#MensajeError").show();
+                },
+                beforeSend: function () {
+                    //Pantalla de carga
+                    $(".modal-body").LoadingOverlay("show",{
+                        imageResizeFactor: 2,
+                        text: "Cargando...",
+                        size: 14
+                    })
+                }
+            });
+
+            //$("#FormModal").modal("hide");
+        }
+
+    </script>
+}
+
+<style>
+    .descripcion-corta {
+        max-width: 300px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+</style>

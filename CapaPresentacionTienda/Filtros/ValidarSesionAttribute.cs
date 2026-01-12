@@ -42,20 +42,6 @@ namespace CapaPresentacionTienda.Filtros
                             });
                 }
             }
-            else
-            {
-                //Validación de Admin para sección de Gestión
-                if (((Usuario)filterContext.HttpContext.Session["Usuario"]).EsAdmin != true)
-                {
-                    var url = "/Tienda/Index";
-
-                    filterContext.Result = new JsonResult
-                    {
-                        Data = new { redirect = url },
-                        JsonRequestBehavior = JsonRequestBehavior.AllowGet
-                    };
-                }
-            }
         }
     }
 }

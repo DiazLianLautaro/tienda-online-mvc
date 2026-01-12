@@ -1,6 +1,8 @@
 ﻿using CapaEntidad;
 using CapaNegocio;
 using CapaPresentacionTienda.Filtros;
+using ClosedXML.Excel;
+
 
 //using ClosedXML.Excel;
 using System;
@@ -20,11 +22,15 @@ namespace CapaPresentacionAdmin.Controllers
     [ValidarSesion]
     public class HomeController : Controller
     {
+        [ValidarSesion]
+        [ValidarAdmin]
         public ActionResult Index()
         {
             return View();
         }
 
+        [ValidarSesion]
+        [ValidarAdmin]
         public ActionResult Usuarios()
         {
             return View();
@@ -100,49 +106,49 @@ namespace CapaPresentacionAdmin.Controllers
         }
 
 
-        //[HttpPost]
-        //public FileResult ExportarVenta(string fechainicio, string fechafin, string idtransaccion)
-        //{
-        //    List<Reporte> oLista = new List<Reporte>();
-        //    oLista = new CN_Reporte().Ventas(fechainicio, fechafin, idtransaccion);
+        [HttpPost]
+        public FileResult ExportarVenta(string fechainicio, string fechafin, string idtransaccion)
+        {
+            List<Reporte> oLista = new List<Reporte>();
+            oLista = new CN_Reporte().Ventas(fechainicio, fechafin, idtransaccion);
 
-        //    DataTable dt = new DataTable();
+            DataTable dt = new DataTable();
 
-        //    dt.Locale = new CultureInfo("es-US");
-        //    dt.Columns.Add("Fecha Venta", typeof(string));
-        //    dt.Columns.Add("Usuario", typeof(string));
-        //    dt.Columns.Add("Producto", typeof(string));
-        //    dt.Columns.Add("Precio", typeof(decimal));
-        //    dt.Columns.Add("Cantidad", typeof(int));
-        //    dt.Columns.Add("Total", typeof(decimal));
-        //    dt.Columns.Add("IdTransaccion", typeof(string));
+            dt.Locale = new CultureInfo("es-US");
+            dt.Columns.Add("Fecha Venta", typeof(string));
+            dt.Columns.Add("Cliente", typeof(string));
+            dt.Columns.Add("Producto", typeof(string));
+            dt.Columns.Add("Precio", typeof(decimal));
+            dt.Columns.Add("Cantidad", typeof(int));
+            dt.Columns.Add("Total", typeof(decimal));
+            dt.Columns.Add("IdTransaccion", typeof(string));
 
-        //    foreach (Reporte rp in oLista)
-        //    {
-        //        dt.Rows.Add(new object[]
-        //        {
-        //            rp.FechaVenta,
-        //            rp.Usuario,
-        //            rp.Producto,
-        //            rp.Precio,
-        //            rp.Cantidad,
-        //            rp.Total,
-        //            rp.IdTransaccion
-        //        });
-        //    }
+            foreach (Reporte rp in oLista)
+            {
+                dt.Rows.Add(new object[]
+                {
+                    rp.FechaVenta,
+                    rp.Cliente,
+                    rp.Producto,
+                    rp.Precio,
+                    rp.Cantidad,
+                    rp.Total,
+                    rp.IdTransaccion
+                });
+            }
 
-        //    dt.TableName = "Datos";
+            dt.TableName = "Datos";
 
-        //    using (XLWorkbook wb = new XLWorkbook())
-        //    {
-        //        wb.Worksheets.Add(dt);
-        //        using (MemoryStream stream = new MemoryStream())
-        //        {
-        //            wb.SaveAs(stream);
-        //            return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ReporteVenta" + DateTime.Now.ToString() + ".xlsx");
-        //        }
-        //    }
-        //}
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dt);
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ReporteVenta" + DateTime.Now.ToString() + ".xlsx");
+                }
+            }
+        }
 
     }
 }

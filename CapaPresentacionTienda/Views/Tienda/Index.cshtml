@@ -83,54 +83,6 @@
         </div>
     </div>
 </section>-->
-
-
-
-<!-- Carousel -->
-<div class="bg-black p-md-5">
-    <div class="bg-black mx-auto w-75">
-        <div id="carouselExampleCaptions" class="carousel slide bg-black ">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner bg-black mx-auto">
-                <div class="carousel-item active">
-                    <img src="https://e01-elmundo.uecdn.es/assets/multimedia/imagenes/2021/09/08/16311009138426.png" class="d-block mx-auto object-fit-cover " alt="img">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>First slide label</h5>
-                        <p>Some representative placeholder content for the first slide.</p>
-                    </div>
-                </div>
-                <div class="carousel-item bg-black">
-                    <img src="https://i0.wp.com/elplanetaurbano.com/wp-content/uploads/2023/03/Productos-sutentables.jpg?resize=1250%2C720&ssl=1" class="d-block mx-auto object-fit-cover" alt="img">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Second slide label</h5>
-                        <p>Some representative placeholder content for the second slide.</p>
-                    </div>
-                </div>
-                <div class="carousel-item bg-black">
-                    <img src="https://media.licdn.com/dms/image/v2/D5612AQFK2SR1n5wyzg/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1736339829335?e=2147483647&v=beta&t=CK5GLWjG0zDz6wAElzjRF4HGNZOniwbHZF6qIq26hMM" class="d-block mx-auto object-fit-cover" alt="img">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Third slide label</h5>
-                        <p>Some representative placeholder content for the third slide.</p>
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </div>
-</div>
-
-
 <!-- Catálogo-->
 <section id="sProductos">
     <div class="bg-dark ">
@@ -147,268 +99,168 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-
+                    <h3 class="text-white">Filtrar por:</h3>
 
                     <!--Filtros-->
+                    <div class="row g-3 mb-3 align-items-end">
+
+                        <div class="col-12 col-md-2">
+                            <p class="text-white mb-1">Categorías</p>
+                            <div id="contenedorCategoria"></div>
+                        </div>
+
+                        <div class="col-12 col-md-2">
+                            <p class="text-white mb-1">Marcas</p>
+                            <div id="contenedorMarca"></div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <p class="text-white mb-1">Buscar</p>
+                            <input class="form-control" type="text">
+                        </div>
+
+                        <div class="col-6 col-md-2">
+                            <button id="btnAplicarFiltro" class="btn btn-outline-success w-100">
+                                <i class="fas fa-filter"></i> Aplicar Filtros
+                            </button>
+                        </div>
+                        <div class="col-6 col-md-2">
+                            <button id="btnLimpiarFiltro" class="btn btn-outline-info w-100">
+                                <i class="fas fa-arrow-alt-circle-left"></i> Limpiar Filtros
+                            </button>
+                        </div>
+
+                    </div>
+                    <!--<div class="row mb-2">-->
+                    <!--Categorias-->
+                        <!--<div class="col-12 col-md-3 col-lg-3">
+                                <div class="row">
+                                    <div class="col-sm-3 col-md-4">
+                                        <p class="text-white">Categorías</p>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <div id="contenedorCategoria" class="card-body">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>-->
+                                    <!--Marcas-->
+                    <!--<div class="col-12 col-md-3 col-lg-3">
+                        <div class="row">
+                            <div class="col-sm-3 col-md-4">
+                                <p class="text-white">Marcas</p>
+                            </div>
+                            <div class="col-6">
+                                <div id="contenedorMarca" class="card-body">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-3 col-lg-3">
+                        <div class="d-grid gap-2">
+                            <input class="form-control" type="text" />
+                        </div>
+                    </div>-->
+                                    <!--Aplicar Filtros-->
+                                    <!--<div class="col-12 col-md-3 col-lg-3">
+                            <div class="d-grid gap-2">
+                                <button id="btnAplicarFiltro" class="btn btn-outline-success btn-block" type="button">
+                                    <i class="fas fa-filter"></i>Aplicar Filtros
+                                </button>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-sm-10 pt-5">
+                    <div id="contenedorProducto" class="row gx-4 gx-lg-4 row-cols-2 row-cols-md-3 row-cols-xl-4  justify-content-center">
+
+
+
+                        <div class="col mb-5">
+                            <div class="card h-100">
+                                <!-- Product image-->
+                                <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                                <!-- Product details-->
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <h5 class="fw-bolder">Producto</h5>
+                                        <!-- Product price-->
+                                        $00.00 - $00.00
+                                    </div>
+                                </div>
+                                <!-- Product actions-->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Detalle</a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col mb-5">
+                            <div class="card h-100">
+                                <!-- Sale badge-->
+                                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                                <!-- Product image-->
+                                <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                                <!-- Product details-->
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <h5 class="fw-bolder">Special Item</h5>
+                                        <!-- Product reviews-->
+                                        <div class="d-flex justify-content-center small text-warning mb-2">
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                            <div class="bi-star-fill"></div>
+                                        </div>
+                                        <!-- Product price-->
+                                        <span class="text-muted text-decoration-line-through">$20.00</span>
+                                        $18.00
+                                    </div>
+                                </div>
+                                <!-- Product actions-->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
                     <div class="row">
-                        <div class="col-sm-3 col-md-4 pt-md-5 bg-dark">
-
-                            <!--Categorias-->
-                            <div class="row mb-3">
-                                    <div class="col-sm-6">
-                                        <div class="card">
-                                            <div class="card-header bg-black text-white">
-                                                Categorias
-                                            </div>
-                                            <div id="contenedorCategoria" class="card-body">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                            @*</div>*@
-
-                            <!--Marcas-->
-                            @*<div class="row mb-3">*@
-                                    <div class="col-sm-6">
-                                        <div class="card">
-                                            <div class="card-header bg-black text-white">
-                                                Marcas
-                                            </div>
-                                            <div id="contenedorMarca" class="card-body">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-
-                            <!--Aplicar Filtros-->
-                            <div class="row mb-3">
-                                <div class="col-sm-12">
-                                    <div class="d-grid gap-2">
-                                        <button id="btnAplicarFiltro" class="btn btn-outline-success btn-block" type="button">
-                                            <i class="fas fa-filter"></i>Aplicar Filtros
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-12 d-flex justify-content-center mt-4">
+                            <ul id="paginacion" class="pagination"></ul>
                         </div>
                     </div>
 
-                    <div class="row justify-content-center">
-                        <div class="col-sm-10 pt-5">
-                            <div id="contenedorProducto" class="row gx-4 gx-lg-4 row-cols-2 row-cols-md-3 row-cols-xl-4  justify-content-center">
-
-
-                                <div class="col mb-5">
-                                    <div class="card h-100">
-                                        <!-- Product image-->
-                                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                                        <!-- Product details-->
-                                        <div class="card-body p-4">
-                                            <div class="text-center">
-                                                <!-- Product name-->
-                                                <h5 class="fw-bolder">Fancy Product</h5>
-                                                <!-- Product price-->
-                                                $40.00 - $80.00
-                                            </div>
-                                        </div>
-                                        <!-- Product actions-->
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col mb-5">
-                                    <div class="card h-100">
-                                        <!-- Sale badge-->
-                                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                                        <!-- Product image-->
-                                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                                        <!-- Product details-->
-                                        <div class="card-body p-4">
-                                            <div class="text-center">
-                                                <!-- Product name-->
-                                                <h5 class="fw-bolder">Special Item</h5>
-                                                <!-- Product reviews-->
-                                                <div class="d-flex justify-content-center small text-warning mb-2">
-                                                    <div class="bi-star-fill"></div>
-                                                    <div class="bi-star-fill"></div>
-                                                    <div class="bi-star-fill"></div>
-                                                    <div class="bi-star-fill"></div>
-                                                    <div class="bi-star-fill"></div>
-                                                </div>
-                                                <!-- Product price-->
-                                                <span class="text-muted text-decoration-line-through">$20.00</span>
-                                                $18.00
-                                            </div>
-                                        </div>
-                                        <!-- Product actions-->
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
 </section>
 
-<!-- Portfolio-->
-<div id="portfolio">
-    <div class="container-fluid p-0">
-        <div class="row g-0">
-            <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box" href="assets/img/portfolio/fullsize/1.jpg" title="Project Name">
-                    <img class="img-fluid" src="https://www.univision.com/_next/image?url=https%3A%2F%2Fst1.uvnimg.com%2F35%2F28%2F624e5c084d01ac2f4cb81089d6d0%2Fcajas-y-productos.jpg&w=1280&q=75" alt="..." />
-                    <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">Category</div>
-                        <div class="project-name">Project Name</div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box" href="assets/img/portfolio/fullsize/2.jpg" title="Project Name">
-                    <img class="img-fluid" src="https://media.istockphoto.com/id/1414801672/es/foto/caja-de-cart%C3%B3n-con-producto-cosm%C3%A9tico-en-frente-od-puerta-abierta-compra-online-y-concepto-de.jpg?s=612x612&w=0&k=20&c=h09o9zOOzXCE4RP71GHP8qsrE21oUQyxQvJf2vMhkmE=" alt="..." />
-                    <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">Category</div>
-                        <div class="project-name">Project Name</div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box" href="assets/img/portfolio/fullsize/3.jpg" title="Project Name">
-                    <img class="img-fluid" src="https://www.bamboocosmeticos.com/wp-content/uploads/2024/11/cosmeticos-bamboo-store.jpg" alt="..." />
-                    <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">Category</div>
-                        <div class="project-name">Project Name</div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box" href="assets/img/portfolio/fullsize/4.jpg" title="Project Name">
-                    <img class="img-fluid" src="https://img.freepik.com/fotos-premium/cosmeticos-naturales-cabello-cuidado-piel-champu-solido-aceites-cremas-mas_528985-6462.jpg?semt=ais_hybrid&w=740&q=80" alt="..." />
-                    <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">Category</div>
-                        <div class="project-name">Project Name</div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box" href="assets/img/portfolio/fullsize/5.jpg" title="Project Name">
-                    <img class="img-fluid" src="https://bellezaideal.es/wp-content/uploads/2020/05/productos-belleza.jpeg" alt="..." />
-                    <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">Category</div>
-                        <div class="project-name">Project Name</div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box" href="assets/img/portfolio/fullsize/6.jpg" title="Project Name">
-                    <img class="img-fluid" src="https://i0.wp.com/elplanetaurbano.com/wp-content/uploads/2023/03/Productos-de-belleza-sustentables.jpg?resize=640%2C359&ssl=1" alt="..." />
-                    <div class="portfolio-box-caption p-3">
-                        <div class="project-category text-white-50">Category</div>
-                        <div class="project-name">Project Name</div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Call to action-->
-<section class="page-section bg-dark text-white">
-    <div class="container px-4 px-lg-5 text-center">
-        <h2 class="mb-4">Free Download at Start Bootstrap!</h2>
-        <a class="btn btn-light btn-xl" href="https://startbootstrap.com/theme/creative/">Download Now!</a>
-    </div>
-</section>
-<!-- Contact-->
-<section class="page-section" id="contact">
-    <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
-            <div class="col-lg-8 col-xl-6 text-center">
-                <h2 class="mt-0">Let's Get In Touch!</h2>
-                <hr class="divider" />
-                <p class="text-muted mb-5">Ready to start your next project with us? Send us a messages and we will get back to you as soon as possible!</p>
-            </div>
-        </div>
-        <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
-            <div class="col-lg-6">
-                <!-- * * * * * * * * * * * * * * *-->
-                <!-- * * SB Forms Contact Form * *-->
-                <!-- * * * * * * * * * * * * * * *-->
-                <!-- This form is pre-integrated with SB Forms.-->
-                <!-- To make this form functional, sign up at-->
-                <!-- https://startbootstrap.com/solution/contact-forms-->
-                <!-- to get an API token!-->
-                <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-                    <!-- Name input-->
-                    <div class="form-floating mb-3">
-                        <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
-                        <label for="name">Full name</label>
-                        <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
-                    </div>
-                    <!-- Email address input-->
-                    <div class="form-floating mb-3">
-                        <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
-                        <label for="email">Email address</label>
-                        <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                        <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
-                    </div>
-                    <!-- Phone number input-->
-                    <div class="form-floating mb-3">
-                        <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
-                        <label for="phone">Phone number</label>
-                        <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
-                    </div>
-                    <!-- Message input-->
-                    <div class="form-floating mb-3">
-                        <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
-                        <label for="message">Message</label>
-                        <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
-                    </div>
-                    <!-- Submit success message-->
-                    <!---->
-                    <!-- This is what your users will see when the form-->
-                    <!-- has successfully submitted-->
-                    <div class="d-none" id="submitSuccessMessage">
-                        <div class="text-center mb-3">
-                            <div class="fw-bolder">Form submission successful!</div>
-                            To activate this form, sign up at
-                            <br />
-                            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                        </div>
-                    </div>
-                    <!-- Submit error message-->
-                    <!---->
-                    <!-- This is what your users will see when there is-->
-                    <!-- an error submitting the form-->
-                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                    <!-- Submit Button-->
-                    <div class="d-grid"><button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Submit</button></div>
-                </form>
-            </div>
-        </div>
-        <div class="row gx-4 gx-lg-5 justify-content-center">
-            <div class="col-lg-4 text-center mb-5 mb-lg-0">
-                <i class="bi-phone fs-2 mb-3 text-muted"></i>
-                <div>+1 (555) 123-4567</div>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 @section scripts{
 
+
+
     <script>
+
+        var paginaActual = 1;
+        var productosPorPagina = 12;
+
         $(document).ready(function () {
             MostrarCategorias();
-            MostrarProductos(0, 0)
+            MostrarProductos(0, 0, 1);
         })
 
         //ListaCategorias
@@ -420,19 +272,35 @@
                 contentType: "application/json; charset=utf-8",
                 success: function (response) {
 
+                    $("#contenedorCategoria").empty();
                     $("#contenedorCategoria").LoadingOverlay("hide");
 
-                    $("<div>").addClass("form-check").append(
-                        $("<input>").addClass("form-check-input").attr({ "type": "radio", "name": "categoria", "value": "0", "id": "cx", "checked": "checked" }),
-                        $("<label>").addClass("form-check-label").text("Todos").attr({ "for": "cx" })
-                    ).appendTo("#contenedorCategoria")
+                    // Crear select
+                    var select = $("<select>")
+                        .addClass("form-select")
+                        .attr({
+                            "id": "selectCategoria",
+                            "name": "categoria"
+                        });
 
+                    // Opción Inicial
+                    select.append(
+                        $("<option>")
+                            .val(0)
+                            .text("Todas")
+                    );
+
+                    // Opciones dinámicas
                     $.each(response.data, function (i, element) {
-                        $("<div>").addClass("form-check").append(
-                            $("<input>").addClass("form-check-input").attr({ "type": "radio", "name": "categoria", "value": element.IdCategoria, "id": "c" + i }),
-                            $("<label>").addClass("form-check-label").text(element.Descripcion).attr({ "for": "c" + i })
-                        ).appendTo("#contenedorCategoria")
-                    })
+                        select.append(
+                            $("<option>")
+                                .val(element.IdCategoria)
+                                .text(element.Descripcion)
+                        );
+                    });
+
+                    // Agregar select al contenedor
+                    $("#contenedorCategoria").append(select);
 
                     MostrarMarcas();
 
@@ -440,13 +308,13 @@
                 beforeSend: function () {
                     $("#contenedorCategoria").LoadingOverlay("show");
                 }
-            })
+            });
         }
 
         //ListarMarcaPorCategoria
         function MostrarMarcas() {
 
-            var _idcategoria = $("input[name=categoria]:checked").val()
+            var _idcategoria = $("#selectCategoria").val();
 
             jQuery.ajax({
                 url: "@Url.Action("ListarMarcaPorCategoria", "Tienda")",
@@ -456,20 +324,35 @@
                 contentType: "application/json; charset=utf-8",
                 success: function (response) {
 
-                    $("#contenedorMarca").html("");
+                    $("#contenedorMarca").empty();
                     $("#contenedorMarca").LoadingOverlay("hide");
 
-                    $("<div>").addClass("form-check").append(
-                        $("<input>").addClass("form-check-input").attr({ "type": "radio", "name": "marca", "value": "0", "id": "mx", "checked": "checked" }),
-                        $("<label>").addClass("form-check-label").text("Todos").attr({ "for": "mx" })
-                    ).appendTo("#contenedorMarca")
+                    // Crear select de marcas
+                    var select = $("<select>")
+                        .addClass("form-select")
+                        .attr({
+                            "id": "selectMarca",
+                            "name": "marca"
+                        });
 
+                    // Opción Inicial
+                    select.append(
+                        $("<option>")
+                            .val(0)
+                            .text("Todas")
+                    );
+
+                    // Opciones dinámicas
                     $.each(response.data, function (i, element) {
-                        $("<div>").addClass("form-check").append(
-                            $("<input>").addClass("form-check-input").attr({ "type": "radio", "name": "marca", "value": element.IdMarca, "id": "m" + i }),
-                            $("<label>").addClass("form-check-label").text(element.Descripcion).attr({ "for": "m" + i })
-                        ).appendTo("#contenedorMarca")
-                    })
+                        select.append(
+                            $("<option>")
+                                .val(element.IdMarca)
+                                .text(element.Descripcion)
+                        );
+                    });
+
+                    // Agregar al contenedor
+                    $("#contenedorMarca").append(select);
                 },
                 beforeSend: function () {
                     $("#contenedorMarca").LoadingOverlay("show");
@@ -478,17 +361,34 @@
         }
 
         // Acción de actualizar la lista de selección de marcas al seleccionar una categoría.
-        $(document).on("change", "input[name=categoria]", function () {
-            MostrarMarcas()
+        $(document).on("change", "#selectCategoria", function () {
+            MostrarMarcas();
+            //MostrarProductos($(this).val(), 0, 1);  //para que filtre automáticamente al seleccionar una categoria
+        });
+
+        //Filtro
+        $("#btnAplicarFiltro").click(function () {
+            var _idcategoria = $("#selectCategoria").val();
+            var _idmarca = $("#selectMarca").val();
+            MostrarProductos(_idcategoria, _idmarca, 1);
+        });
+
+        $("#btnLimpiarFiltro").click(function () {
+            $("#selectCategoria").val(0);
+            $("#selectMarca").val(0);
+            MostrarProductos(0, 0, 1);
         })
 
         //Listar Productos
-        function MostrarProductos(_idcategoria, _idmarca) {
+        function MostrarProductos(_idcategoria, _idmarca, pagina = 1) {
+
+            paginaActual = pagina;
 
             jQuery.ajax({
                 url: "@Url.Action("ListarProductos", "Tienda")",
                 type: "POST",
-                data: JSON.stringify({ idcategoria: _idcategoria, idmarca: _idmarca }),
+                data: JSON.stringify({
+                    idcategoria: _idcategoria, idmarca: _idmarca, pagina: paginaActual, cantidad: productosPorPagina }),
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (response) {
@@ -496,21 +396,20 @@
                     $("#contenedorProducto").html("");
                     $("#contenedorProducto").LoadingOverlay("hide");
 
+
+
                     $.each(response.data, function (i, element) {
 
-                        const ruta = String(element.RutaImagen ?? "");
                         const nombre = String(element.NombreImagen ?? "");
-                        const extension = String(element.Extension ?? "");
 
                         const src = "@Url.Content("~/Images/")" + nombre;
 
                         $("<div>").addClass("col mb-5").append(
                             $("<div>").addClass("card h-100").append(
-                                //$("<img>").addClass("card-img-top").attr({ "src": "data:image/" + element.Extension.replace(".", "") + ";base64," + element.Base64 }),
                                 $("<img>").addClass("card-img-top").attr("src", src)
                                     .on("error", function () {
-                                    $(this).attr("src", "https://static.vecteezy.com/system/resources/previews/022/059/000/non_2x/no-image-available-icon-vector.jpg");
-                                }),
+                                        $(this).attr("src", "https://static.vecteezy.com/system/resources/previews/022/059/000/non_2x/no-image-available-icon-vector.jpg");
+                                    }),
                                 $("<div>").addClass("card-body p-4").append(
                                     $("<div>").addClass("text-center").append(
                                         $("<h5>").addClass("fw-bolder").text(element.Nombre),
@@ -533,7 +432,8 @@
                             )
                         ).appendTo("#contenedorProducto")
 
-                    })
+                    });
+                    ConstruirPaginacion(response.total);
                 },
                 beforeSend: function () {
                     $("#contenedorProducto").LoadingOverlay("show");
@@ -541,12 +441,58 @@
             })
         }
 
-        //Filtro
-        $("#btnAplicarFiltro").click(function () {
-            var _idcategoria = $("input[name=categoria]:checked").val()
-            var _idmarca = $("input[name=marca]:checked").val()
-            MostrarProductos(_idcategoria, _idmarca)
-        })
+        //Paginación
+        function ConstruirPaginacion(totalRegistros) {
+
+            $("#paginacion").empty();
+
+            var totalPaginas = Math.ceil(totalRegistros / productosPorPagina);
+
+            // Botón Inicio
+            $("<li>").addClass("page-item")
+                .append(
+                    $("<a>").addClass("page-link").text("Inicio").click(function () {
+                        MostrarProductos(
+                            $("#selectCategoria").val(),
+                            $("#selectMarca").val(),
+                            1
+                        );
+                    })
+                )
+                .appendTo("#paginacion");
+
+            // Botones intermedios
+            for (let i = 1; i <= totalPaginas; i++) {
+                $("<li>").addClass("page-item " + (i === paginaActual ? "active" : ""))
+                    .append(
+                        $("<a>").addClass("page-link").text(i).click(function () {
+                            MostrarProductos(
+                                $("#selectCategoria").val(),
+                                $("#selectMarca").val(),
+                                i
+                            );
+                        })
+                    )
+                    .appendTo("#paginacion");
+            }
+
+            // Botón Fin
+            $("<li>").addClass("page-item")
+                .append(
+                    $("<a>").addClass("page-link").text("Fin").click(function () {
+                        MostrarProductos(
+                            $("#selectCategoria").val(),
+                            $("#selectMarca").val(),
+                            totalPaginas
+                        );
+                    })
+                )
+                .appendTo("#paginacion");
+        }
+
+
+
+
 
         //AgregarCarrito
         $(document).on("click", "button.agregarcarrito", function () {
@@ -583,13 +529,8 @@
                     else {
                         swal("", data.mensaje, "warning");
                     }
-
-
-
                 }
             });
-
-
         })
 
 

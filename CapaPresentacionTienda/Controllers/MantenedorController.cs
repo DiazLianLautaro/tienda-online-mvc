@@ -18,19 +18,26 @@ namespace CapaPresentacionAdmin.Controllers
     public class MantenedorController : Controller
     {
         // GET: Mantenedor
+        [ValidarSesion]
+        [ValidarAdmin]
         public ActionResult Categoria()
         {
             return View();
         }
+
+        [ValidarAdmin]
         public ActionResult Marca()
         {
             return View();
         }
+
+        [ValidarAdmin]
         public ActionResult Producto()
         {
             return View();
         }
 
+        [ValidarAdmin]
         public ActionResult Detalle(int Id)
         {
             //var producto = new CN_Producto().Listar(false).FirstOrDefault( p => p.IdProducto == Id );

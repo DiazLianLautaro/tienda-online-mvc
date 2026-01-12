@@ -152,10 +152,34 @@ namespace CapaNegocio
                 Mensaje = "No se puedo realizar la operación";
                 return false;
             }
-
-
-
-
         }
+
+
+        public bool CorreoContacto(string correo, string asunto, string mensaje)
+        {
+            try
+            {
+                if (!String.IsNullOrEmpty(correo)) 
+                {
+                    bool resultado = CN_Recursos.EnviarCorreoContacto(correo, asunto, mensaje);
+
+                    if (resultado)
+                        return true;
+                    else
+                        return false;
+                }
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                // = "No se puedo realizar la operación";
+                return false;
+            }
+        }
+
+
+
+
     }
 }
