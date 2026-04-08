@@ -1,0 +1,1277 @@
+USE [master]
+GO
+/****** Object:  Database [TiendaOnline_DB]    Script Date: 8/4/2026 18:33:47 ******/
+CREATE DATABASE [TiendaOnline_DB]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'TiendaOnline_DB', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\DATA\TiendaOnline_DB.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'TiendaOnline_DB_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\DATA\TiendaOnline_DB_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT, LEDGER = OFF
+GO
+ALTER DATABASE [TiendaOnline_DB] SET COMPATIBILITY_LEVEL = 160
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [TiendaOnline_DB].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [TiendaOnline_DB] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET AUTO_CLOSE ON 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET  ENABLE_BROKER 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET RECOVERY SIMPLE 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET  MULTI_USER 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [TiendaOnline_DB] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [TiendaOnline_DB] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+ALTER DATABASE [TiendaOnline_DB] SET QUERY_STORE = ON
+GO
+ALTER DATABASE [TiendaOnline_DB] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, CLEANUP_POLICY = (STALE_QUERY_THRESHOLD_DAYS = 30), DATA_FLUSH_INTERVAL_SECONDS = 900, INTERVAL_LENGTH_MINUTES = 60, MAX_STORAGE_SIZE_MB = 1000, QUERY_CAPTURE_MODE = AUTO, SIZE_BASED_CLEANUP_MODE = AUTO, MAX_PLANS_PER_QUERY = 200, WAIT_STATS_CAPTURE_MODE = ON)
+GO
+USE [TiendaOnline_DB]
+GO
+/****** Object:  UserDefinedTableType [dbo].[Detalle_Venta]    Script Date: 8/4/2026 18:33:47 ******/
+CREATE TYPE [dbo].[Detalle_Venta] AS TABLE(
+	[IdProducto] [int] NULL,
+	[Cantidad] [int] NULL,
+	[Total] [decimal](18, 2) NULL
+)
+GO
+/****** Object:  Table [dbo].[Carrito]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Carrito](
+	[IdCarrito] [int] IDENTITY(1,1) NOT NULL,
+	[IdUsuario] [int] NULL,
+	[ProductoId] [int] NULL,
+	[Cantidad] [int] NULL,
+ CONSTRAINT [PK__Venta.Pr__3214EC0731E7ECA3] PRIMARY KEY CLUSTERED 
+(
+	[IdCarrito] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[DetalleProducto]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[DetalleProducto](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ProductoId] [int] NOT NULL,
+	[FechaIngreso] [date] NULL,
+	[PrecioCompra] [decimal](10, 2) NOT NULL,
+	[CantidadCompra] [int] NULL,
+	[PrecioVenta] [decimal](10, 2) NOT NULL,
+ CONSTRAINT [PK__DetalleP__3214EC070CB3FD4A] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Marca]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Marca](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Descripcion] [varchar](25) NOT NULL,
+	[Activo] [bit] NULL,
+	[FechaRegistro] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Producto]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Producto](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Nombre] [varchar](30) NOT NULL,
+	[MarcaId] [int] NOT NULL,
+	[CategoriaId] [int] NOT NULL,
+	[Descripcion] [varchar](150) NULL,
+	[Codigo] [varchar](15) NULL,
+	[Stock] [int] NOT NULL,
+	[NombreImagen] [varchar](150) NULL,
+	[Activo] [bit] NOT NULL,
+	[RutaImagen] [varchar](200) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  UserDefinedFunction [dbo].[fn_obtenerCarritoUsuario]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create function [dbo].[fn_obtenerCarritoUsuario](
+@idUsuario int
+)
+returns table
+as
+return(
+    select p.Id,
+           m.Descripcion [DesMarca],
+           p.Nombre,
+           dp.PrecioVenta,
+           c.Cantidad,
+           p.RutaImagen,
+           p.NombreImagen
+    from CARRITO c
+    inner join PRODUCTO p on p.Id = c.ProductoId
+    inner join MARCA m on m.Id = p.MarcaId
+    inner join DetalleProducto dp on dp.ProductoId = p.Id
+    where c.IdUsuario = @idUsuario
+    )
+GO
+/****** Object:  Table [dbo].[Categoria]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Categoria](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Descripcion] [varchar](25) NOT NULL,
+	[Activo] [bit] NULL,
+	[FechaRegistro] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Detalle_Venta]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Detalle_Venta](
+	[IdDetalleVenta] [int] IDENTITY(1,1) NOT NULL,
+	[IdVenta] [int] NULL,
+	[IdProducto] [int] NULL,
+	[Cantidad] [int] NULL,
+	[Total] [decimal](10, 2) NULL,
+ CONSTRAINT [PK_Detalle_Venta] PRIMARY KEY CLUSTERED 
+(
+	[IdDetalleVenta] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[DetallePago]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[DetallePago](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[MetodoPagoId] [int] NOT NULL,
+	[Anticipado] [bit] NOT NULL,
+	[EstadoPago] [varchar](50) NOT NULL,
+	[IdVenta] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[EmpresaPago]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[EmpresaPago](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Nombre] [varchar](30) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Metodo]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Metodo](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Nombre] [varchar](20) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MetodoPago]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MetodoPago](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[MetodoId] [int] NOT NULL,
+	[EmpresaId] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[OfertaEspecial]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[OfertaEspecial](
+	[OfertaId] [int] IDENTITY(1,1) NOT NULL,
+	[Descripcion] [varchar](100) NULL,
+	[FachaInicio] [datetime] NULL,
+	[FehcaFin] [datetime] NULL,
+	[CodigoDescuento] [varchar](20) NULL,
+	[Activo] [bit] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[OfertaId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[OrdenTurno.Turno]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[OrdenTurno.Turno](
+	[Id] [int] NOT NULL,
+	[TurnoId] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Servicio]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Servicio](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[NombreServicio] [varchar](25) NULL,
+	[Duracion] [time](7) NULL,
+	[Precio] [int] NOT NULL,
+	[Disponibilidad] [bit] NULL,
+	[Visible] [bit] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Turno]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Turno](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Fecha] [date] NULL,
+	[Hora] [time](7) NULL,
+	[ServicioId] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Usuario]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Usuario](
+	[IdUsuario] [int] IDENTITY(1,1) NOT NULL,
+	[Nombre] [varchar](100) NOT NULL,
+	[Apellido] [varchar](100) NOT NULL,
+	[Email] [varchar](100) NOT NULL,
+	[Clave] [varchar](100) NOT NULL,
+	[Telefono] [varchar](50) NULL,
+	[ImagenPerfil] [varchar](250) NULL,
+	[EsAdmin] [bit] NULL,
+	[Reestablecer] [bit] NULL,
+	[Activo] [bit] NULL,
+ CONSTRAINT [PK__Usuario__3214EC07CCBC0F3C] PRIMARY KEY CLUSTERED 
+(
+	[IdUsuario] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Venta]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Venta](
+	[IdVenta] [int] IDENTITY(1,1) NOT NULL,
+	[IdUsuario] [int] NULL,
+	[IdTransaccion] [varchar](50) NULL,
+	[FechaVenta] [datetime] NOT NULL,
+	[MontoTotal] [decimal](10, 2) NOT NULL,
+	[Direccion] [varchar](100) NULL,
+ CONSTRAINT [PK__Orden__3214EC071E3E4B79] PRIMARY KEY CLUSTERED 
+(
+	[IdVenta] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[Carrito] ON 
+GO
+INSERT [dbo].[Carrito] ([IdCarrito], [IdUsuario], [ProductoId], [Cantidad]) VALUES (17, 2, 10, 1)
+GO
+INSERT [dbo].[Carrito] ([IdCarrito], [IdUsuario], [ProductoId], [Cantidad]) VALUES (18, 2, 16, 1)
+GO
+INSERT [dbo].[Carrito] ([IdCarrito], [IdUsuario], [ProductoId], [Cantidad]) VALUES (19, 2, 6, 1)
+GO
+INSERT [dbo].[Carrito] ([IdCarrito], [IdUsuario], [ProductoId], [Cantidad]) VALUES (20, 2, 8, 1)
+GO
+INSERT [dbo].[Carrito] ([IdCarrito], [IdUsuario], [ProductoId], [Cantidad]) VALUES (21, 2, 13, 1)
+GO
+INSERT [dbo].[Carrito] ([IdCarrito], [IdUsuario], [ProductoId], [Cantidad]) VALUES (22, 2, 14, 1)
+GO
+INSERT [dbo].[Carrito] ([IdCarrito], [IdUsuario], [ProductoId], [Cantidad]) VALUES (26, 1, 8, 1)
+GO
+INSERT [dbo].[Carrito] ([IdCarrito], [IdUsuario], [ProductoId], [Cantidad]) VALUES (27, 1, 11, 1)
+GO
+SET IDENTITY_INSERT [dbo].[Carrito] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Categoria] ON 
+GO
+INSERT [dbo].[Categoria] ([Id], [Descripcion], [Activo], [FechaRegistro]) VALUES (1, N'Tecnologia', 1, NULL)
+GO
+INSERT [dbo].[Categoria] ([Id], [Descripcion], [Activo], [FechaRegistro]) VALUES (2, N'Muebles', 1, NULL)
+GO
+INSERT [dbo].[Categoria] ([Id], [Descripcion], [Activo], [FechaRegistro]) VALUES (3, N'Dormitorio', 0, NULL)
+GO
+INSERT [dbo].[Categoria] ([Id], [Descripcion], [Activo], [FechaRegistro]) VALUES (4, N'Deportes', 1, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[Categoria] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Detalle_Venta] ON 
+GO
+INSERT [dbo].[Detalle_Venta] ([IdDetalleVenta], [IdVenta], [IdProducto], [Cantidad], [Total]) VALUES (5, 4, 1, 10, CAST(10.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[Detalle_Venta] ([IdDetalleVenta], [IdVenta], [IdProducto], [Cantidad], [Total]) VALUES (6, 4, 2, 5, CAST(70.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[Detalle_Venta] ([IdDetalleVenta], [IdVenta], [IdProducto], [Cantidad], [Total]) VALUES (7, 5, 1, 8, CAST(130.00 AS Decimal(10, 2)))
+GO
+SET IDENTITY_INSERT [dbo].[Detalle_Venta] OFF
+GO
+SET IDENTITY_INSERT [dbo].[DetalleProducto] ON 
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (1, 1, CAST(N'2025-12-21' AS Date), CAST(123.00 AS Decimal(10, 2)), 5, CAST(321.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (2, 2, CAST(N'2025-12-21' AS Date), CAST(60.00 AS Decimal(10, 2)), 5, CAST(75.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (3, 3, CAST(N'2025-12-21' AS Date), CAST(123.00 AS Decimal(10, 2)), 5, CAST(145.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (4, 4, CAST(N'2025-12-21' AS Date), CAST(0.00 AS Decimal(10, 2)), 25, CAST(51.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (5, 5, CAST(N'2025-12-25' AS Date), CAST(120.00 AS Decimal(10, 2)), 10, CAST(145.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (6, 6, CAST(N'2025-12-25' AS Date), CAST(80.50 AS Decimal(10, 2)), 0, CAST(95.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (7, 7, CAST(N'2025-12-25' AS Date), CAST(200.00 AS Decimal(10, 2)), 3, CAST(230.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (8, 8, CAST(N'2025-12-25' AS Date), CAST(45.00 AS Decimal(10, 2)), 25, CAST(60.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (9, 9, CAST(N'2025-12-25' AS Date), CAST(150.75 AS Decimal(10, 2)), 8, CAST(175.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (10, 10, CAST(N'2025-12-25' AS Date), CAST(300.00 AS Decimal(10, 2)), 1, CAST(350.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (11, 11, CAST(N'2025-12-25' AS Date), CAST(90.00 AS Decimal(10, 2)), 12, CAST(110.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (12, 12, CAST(N'2025-12-25' AS Date), CAST(500.00 AS Decimal(10, 2)), 0, CAST(580.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (13, 13, CAST(N'2025-12-25' AS Date), CAST(60.00 AS Decimal(10, 2)), 7, CAST(75.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (14, 14, CAST(N'2025-12-25' AS Date), CAST(220.00 AS Decimal(10, 2)), 4, CAST(260.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (15, 15, CAST(N'2025-12-25' AS Date), CAST(75.00 AS Decimal(10, 2)), 6, CAST(90.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (16, 16, CAST(N'2025-12-25' AS Date), CAST(180.00 AS Decimal(10, 2)), 2, CAST(210.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (17, 17, CAST(N'2025-12-25' AS Date), CAST(55.50 AS Decimal(10, 2)), 0, CAST(70.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (18, 18, CAST(N'2025-12-25' AS Date), CAST(260.00 AS Decimal(10, 2)), 10, CAST(310.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (19, 19, CAST(N'2025-12-25' AS Date), CAST(95.00 AS Decimal(10, 2)), 4, CAST(115.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (20, 20, CAST(N'2025-12-25' AS Date), CAST(400.00 AS Decimal(10, 2)), 1, CAST(470.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (21, 21, CAST(N'2025-12-25' AS Date), CAST(130.00 AS Decimal(10, 2)), 9, CAST(155.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (22, 22, CAST(N'2025-12-25' AS Date), CAST(65.00 AS Decimal(10, 2)), 20, CAST(80.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (23, 23, CAST(N'2025-12-25' AS Date), CAST(220.00 AS Decimal(10, 2)), 3, CAST(255.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (24, 24, CAST(N'2025-12-25' AS Date), CAST(310.00 AS Decimal(10, 2)), 0, CAST(360.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (25, 25, CAST(N'2025-12-25' AS Date), CAST(85.00 AS Decimal(10, 2)), 14, CAST(105.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (26, 26, CAST(N'2025-12-25' AS Date), CAST(170.00 AS Decimal(10, 2)), 5, CAST(200.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (27, 27, CAST(N'2025-12-25' AS Date), CAST(48.00 AS Decimal(10, 2)), 30, CAST(60.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (28, 28, CAST(N'2025-12-25' AS Date), CAST(290.00 AS Decimal(10, 2)), 2, CAST(340.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (29, 29, CAST(N'2025-12-25' AS Date), CAST(510.00 AS Decimal(10, 2)), 1, CAST(590.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[DetalleProducto] ([Id], [ProductoId], [FechaIngreso], [PrecioCompra], [CantidadCompra], [PrecioVenta]) VALUES (30, 30, CAST(N'2025-12-25' AS Date), CAST(125.00 AS Decimal(10, 2)), 8, CAST(150.00 AS Decimal(10, 2)))
+GO
+SET IDENTITY_INSERT [dbo].[DetalleProducto] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Marca] ON 
+GO
+INSERT [dbo].[Marca] ([Id], [Descripcion], [Activo], [FechaRegistro]) VALUES (1, N'SONYTE', 1, NULL)
+GO
+INSERT [dbo].[Marca] ([Id], [Descripcion], [Activo], [FechaRegistro]) VALUES (2, N'HPTE', 1, NULL)
+GO
+INSERT [dbo].[Marca] ([Id], [Descripcion], [Activo], [FechaRegistro]) VALUES (3, N'LGTE', 1, NULL)
+GO
+INSERT [dbo].[Marca] ([Id], [Descripcion], [Activo], [FechaRegistro]) VALUES (4, N'HYUNDAITE', 1, NULL)
+GO
+INSERT [dbo].[Marca] ([Id], [Descripcion], [Activo], [FechaRegistro]) VALUES (5, N'CANONTE', 0, NULL)
+GO
+INSERT [dbo].[Marca] ([Id], [Descripcion], [Activo], [FechaRegistro]) VALUES (6, N'ROBERTA ALLENTE', 0, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[Marca] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Producto] ON 
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (1, N'Laptop X1', 1, 2, N'Laptop con procesador i5 y 8GB RAM', NULL, 11, N'1.png', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (2, N'Mouse Gamer', 1, 1, N'Mouse Gamer RGB con cable de 150mm', NULL, 4, N'2.jpeg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (3, N'Teclado Mecánico', 3, 3, N'Teclado mecánico retroiluminado', NULL, 30, N'3.png', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (4, N'Monitor 24"', 4, 2, N'Monitor LED 24 pulgadas Full HD', NULL, 15, N'4.jpeg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (5, N'Silla Gamer', 5, 4, N'Silla ergonómica para oficina o juegos', NULL, 8, N'img/silla.jpg', 0, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (6, N'Smartphone A10', 6, 1, N'Teléfono móvil con cámara dual', NULL, 24, N'img/smartphonea10.jpg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (7, N'Tablet Pro', 1, 1, N'Tablet de 10 pulgadas con 64GB', NULL, 12, N'img/tabletpro.jpg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (8, N'Cámara HD', 2, 4, N'Cámara fotográfica 20MP con zoom óptico', NULL, 5, N'img/camarahd.jpg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (9, N'Audífonos Bluetooth', 3, 3, N'Audífonos inalámbricos con micrófono', NULL, 40, N'img/audifonos.jpg', 0, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (10, N'Smartwatch Z1', 4, 1, N'Reloj inteligente con monitor cardíaco', NULL, 19, N'img/smartwatch.jpg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (11, N'Cargador Rápido', 5, 3, N'Cargador USB-C 25W', NULL, 59, N'img/cargador.jpg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (12, N'Memoria USB 64GB', 6, 3, N'Memoria flash 64GB 3.0', NULL, 100, N'img/usb64.jpg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (13, N'Disco Duro 1TB', 1, 3, N'Disco duro externo 1TB', NULL, 24, N'img/hdd1tb.jpg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (14, N'SSD 512GB', 2, 3, N'Disco sólido rápido 512GB', NULL, 17, N'img/ssd512.jpg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (15, N'Router WiFi 6', 3, 3, N'Router de alta velocidad WiFi 6', NULL, 10, N'img/routerwifi6.jpg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (16, N'Cable HDMI', 4, 3, N'Cable HDMI 4K de 2 metros', NULL, 69, N'img/hdmi.jpg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (17, N'Parlantes Bluetooth', 5, 4, N'Altavoces portátiles estéreo', NULL, 35, N'img/parlantes.jpg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (18, N'Webcam Full HD', 6, 4, N'Cámara web con micrófono integrado', NULL, 22, N'img/webcam.jpg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (19, N'Micrófono USB', 1, 4, N'Micrófono condensador profesional', NULL, 16, N'img/microfono.jpg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (20, N'Batería Externa 10000mAh', 2, 3, N'Power bank de carga rápida', NULL, 40, N'img/powerbank.jpg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (21, N'Impresora Láser', 3, 4, N'Impresora multifunción láser monocromática', NULL, 9, N'img/impresora.jpg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (22, N'Escáner Portátil', 4, 4, N'Escáner de documentos A4', NULL, 6, N'img/escaner.jpg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (23, N'Proyector LED', 5, 4, N'Proyector portátil 1080p', NULL, 5, N'img/proyector.jpg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (24, N'Drone X300', 6, 4, N'Drone con cámara 4K y GPS', NULL, 4, N'img/drone.jpg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (25, N'Consola Gamer Z', 1, 1, N'Consola de videojuegos nueva generación', NULL, 3, N'img/consola.jpg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (26, N'Joystick Pro', 2, 3, N'Control inalámbrico ergonómico', NULL, 30, N'img/joystick.jpg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (27, N'Ventilador Laptop', 3, 3, N'Base refrigerante para laptop', NULL, 28, N'img/ventilador.jpg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (28, N'Cable USB Tipo C', 4, 3, N'Cable de carga rápida 1.5m', NULL, 100, N'img/cableusb.jpg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (29, N'Hub USB 4 Puertos', 5, 3, N'Concentrador USB con 4 puertos 3.0', NULL, 45, N'img/hubusb.jpg', 1, NULL)
+GO
+INSERT [dbo].[Producto] ([Id], [Nombre], [MarcaId], [CategoriaId], [Descripcion], [Codigo], [Stock], [NombreImagen], [Activo], [RutaImagen]) VALUES (30, N'Soporte Celular', 6, 3, N'Soporte ajustable para escritorio', NULL, 60, N'img/soporte.jpg', 1, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[Producto] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Usuario] ON 
+GO
+INSERT [dbo].[Usuario] ([IdUsuario], [Nombre], [Apellido], [Email], [Clave], [Telefono], [ImagenPerfil], [EsAdmin], [Reestablecer], [Activo]) VALUES (1, N'Admin', N'Prueba', N'bopele7984@crsay.com', N'688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6', N'', N'', 1, 0, 1)
+GO
+INSERT [dbo].[Usuario] ([IdUsuario], [Nombre], [Apellido], [Email], [Clave], [Telefono], [ImagenPerfil], [EsAdmin], [Reestablecer], [Activo]) VALUES (2, N'Usuario', N'Prueba', N'molef98160@discounp.com', N'688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6', N'', N'', 0, 0, 1)
+GO
+SET IDENTITY_INSERT [dbo].[Usuario] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Venta] ON 
+GO
+INSERT [dbo].[Venta] ([IdVenta], [IdUsuario], [IdTransaccion], [FechaVenta], [MontoTotal], [Direccion]) VALUES (4, 1, N'123321', CAST(N'2026-01-08T11:07:05.147' AS DateTime), CAST(150.00 AS Decimal(10, 2)), N'donde')
+GO
+INSERT [dbo].[Venta] ([IdVenta], [IdUsuario], [IdTransaccion], [FechaVenta], [MontoTotal], [Direccion]) VALUES (5, 2, N'151231', CAST(N'2026-01-08T11:07:19.040' AS DateTime), CAST(10.00 AS Decimal(10, 2)), N'donde2')
+GO
+INSERT [dbo].[Venta] ([IdVenta], [IdUsuario], [IdTransaccion], [FechaVenta], [MontoTotal], [Direccion]) VALUES (7, 1, N'11867231', CAST(N'2026-01-08T11:07:46.787' AS DateTime), CAST(43.00 AS Decimal(10, 2)), N'donde3')
+GO
+INSERT [dbo].[Venta] ([IdVenta], [IdUsuario], [IdTransaccion], [FechaVenta], [MontoTotal], [Direccion]) VALUES (8, 1, N'7546231', CAST(N'2026-01-08T11:08:03.003' AS DateTime), CAST(64.00 AS Decimal(10, 2)), N'donde4')
+GO
+SET IDENTITY_INSERT [dbo].[Venta] OFF
+GO
+ALTER TABLE [dbo].[Carrito]  WITH CHECK ADD  CONSTRAINT [FK_Carrito_Usuario] FOREIGN KEY([IdUsuario])
+REFERENCES [dbo].[Usuario] ([IdUsuario])
+GO
+ALTER TABLE [dbo].[Carrito] CHECK CONSTRAINT [FK_Carrito_Usuario]
+GO
+ALTER TABLE [dbo].[Carrito]  WITH CHECK ADD  CONSTRAINT [FK_VENTAPRODUCTO_PRODUCTO] FOREIGN KEY([IdUsuario])
+REFERENCES [dbo].[Producto] ([Id])
+GO
+ALTER TABLE [dbo].[Carrito] CHECK CONSTRAINT [FK_VENTAPRODUCTO_PRODUCTO]
+GO
+ALTER TABLE [dbo].[Detalle_Venta]  WITH CHECK ADD  CONSTRAINT [FK_Detalle_Venta_Producto] FOREIGN KEY([IdProducto])
+REFERENCES [dbo].[Producto] ([Id])
+GO
+ALTER TABLE [dbo].[Detalle_Venta] CHECK CONSTRAINT [FK_Detalle_Venta_Producto]
+GO
+ALTER TABLE [dbo].[Detalle_Venta]  WITH CHECK ADD  CONSTRAINT [FK_Detalle_Venta_Venta] FOREIGN KEY([IdVenta])
+REFERENCES [dbo].[Venta] ([IdVenta])
+GO
+ALTER TABLE [dbo].[Detalle_Venta] CHECK CONSTRAINT [FK_Detalle_Venta_Venta]
+GO
+ALTER TABLE [dbo].[DetallePago]  WITH CHECK ADD  CONSTRAINT [FK_DETALLEPAGO_METODOPAGO] FOREIGN KEY([MetodoPagoId])
+REFERENCES [dbo].[MetodoPago] ([Id])
+GO
+ALTER TABLE [dbo].[DetallePago] CHECK CONSTRAINT [FK_DETALLEPAGO_METODOPAGO]
+GO
+ALTER TABLE [dbo].[DetallePago]  WITH CHECK ADD  CONSTRAINT [FK_DetallePago_Venta] FOREIGN KEY([IdVenta])
+REFERENCES [dbo].[Venta] ([IdVenta])
+GO
+ALTER TABLE [dbo].[DetallePago] CHECK CONSTRAINT [FK_DetallePago_Venta]
+GO
+ALTER TABLE [dbo].[DetalleProducto]  WITH CHECK ADD  CONSTRAINT [FK_DETALLEPRODUCTO_PRODUCTO] FOREIGN KEY([ProductoId])
+REFERENCES [dbo].[Producto] ([Id])
+GO
+ALTER TABLE [dbo].[DetalleProducto] CHECK CONSTRAINT [FK_DETALLEPRODUCTO_PRODUCTO]
+GO
+ALTER TABLE [dbo].[MetodoPago]  WITH CHECK ADD  CONSTRAINT [FK_METODOPAGO_EMPRESAPAGO] FOREIGN KEY([EmpresaId])
+REFERENCES [dbo].[EmpresaPago] ([Id])
+GO
+ALTER TABLE [dbo].[MetodoPago] CHECK CONSTRAINT [FK_METODOPAGO_EMPRESAPAGO]
+GO
+ALTER TABLE [dbo].[MetodoPago]  WITH CHECK ADD  CONSTRAINT [FK_METODOPAGO_METODO] FOREIGN KEY([MetodoId])
+REFERENCES [dbo].[Metodo] ([Id])
+GO
+ALTER TABLE [dbo].[MetodoPago] CHECK CONSTRAINT [FK_METODOPAGO_METODO]
+GO
+ALTER TABLE [dbo].[OrdenTurno.Turno]  WITH CHECK ADD  CONSTRAINT [FK_ORDENTURNO_TURNO] FOREIGN KEY([TurnoId])
+REFERENCES [dbo].[Turno] ([Id])
+GO
+ALTER TABLE [dbo].[OrdenTurno.Turno] CHECK CONSTRAINT [FK_ORDENTURNO_TURNO]
+GO
+ALTER TABLE [dbo].[Producto]  WITH CHECK ADD  CONSTRAINT [FK_PRODUCTO_CATEGORIA] FOREIGN KEY([CategoriaId])
+REFERENCES [dbo].[Categoria] ([Id])
+GO
+ALTER TABLE [dbo].[Producto] CHECK CONSTRAINT [FK_PRODUCTO_CATEGORIA]
+GO
+ALTER TABLE [dbo].[Producto]  WITH CHECK ADD  CONSTRAINT [FK_PRODUCTO_MARCA] FOREIGN KEY([MarcaId])
+REFERENCES [dbo].[Marca] ([Id])
+GO
+ALTER TABLE [dbo].[Producto] CHECK CONSTRAINT [FK_PRODUCTO_MARCA]
+GO
+ALTER TABLE [dbo].[Turno]  WITH CHECK ADD  CONSTRAINT [FK_TURNO_SERVICIO] FOREIGN KEY([ServicioId])
+REFERENCES [dbo].[Servicio] ([Id])
+GO
+ALTER TABLE [dbo].[Turno] CHECK CONSTRAINT [FK_TURNO_SERVICIO]
+GO
+ALTER TABLE [dbo].[Venta]  WITH CHECK ADD  CONSTRAINT [FK_ORDEN_USUARIO] FOREIGN KEY([IdUsuario])
+REFERENCES [dbo].[Usuario] ([IdUsuario])
+GO
+ALTER TABLE [dbo].[Venta] CHECK CONSTRAINT [FK_ORDEN_USUARIO]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_EditarCategoria]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_EditarCategoria](
+@IdCategoria int,
+@Descripcion varchar(100),
+@Activo bit,
+@Mensaje varchar(500) output,
+@Resultado int output
+)
+as
+begin
+	set @Resultado = 0
+	IF NOT EXISTS (SELECT * FROM CATEGORIA WHERE Descripcion = @Descripcion AND Id != @IdCategoria)
+	begin
+		update top (1) CATEGORIA set
+		Descripcion = @Descripcion,
+		Activo = @Activo
+		where Id = @IdCategoria
+
+		SET @Resultado = 1
+	end
+	else
+		set @Mensaje = 'La categoria ya existe'
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_EditarMarca]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_EditarMarca](
+@IdMarca int,
+@Descripcion varchar(100),
+@Activo bit,
+@Mensaje varchar(500) output,
+@Resultado int output
+)
+as
+begin
+	set @Resultado = 0
+	IF NOT EXISTS (SELECT * FROM MARCA WHERE Descripcion = @Descripcion AND Id != @IdMarca)
+	begin
+		update top (1) MARCA set
+		Descripcion = @Descripcion,
+		Activo = @Activo
+		where Id = @IdMarca
+
+		SET @Resultado = 1
+	end
+	else
+		set @Mensaje = 'La Marca ya existe'
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_EditarProducto]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE proc [dbo].[sp_EditarProducto](
+@IdProducto int,
+@Nombre varchar(100),
+@Descripcion varchar(100),
+@IdMarca varchar(100),
+@IdCategoria varchar(100),
+@Stock int,
+@Activo bit,
+@PrecioCompra decimal(10,2),
+@PrecioVenta decimal(10,2),
+@CantidadCompra int,
+@Mensaje varchar(500) output,
+@Resultado int output
+)
+as
+begin try
+	begin tran
+
+		set @Resultado = 0
+		if not exists (select * from PRODUCTO where Nombre = @Nombre and Id != @IdProducto)
+		begin
+			update PRODUCTO  set
+			Nombre = @Nombre,
+			Descripcion = @Descripcion,
+			MarcaId = @IdMarca,
+			CategoriaId = @IdCategoria,
+			Stock = @Stock,
+			Activo = @Activo
+			where Id = @IdProducto
+
+			update DetalleProducto set
+			PrecioCompra = @PrecioCompra,
+			PrecioVenta = @PrecioVenta,
+			CantidadCompra = CantidadCompra
+			where ProductoId = @IdProducto
+
+			SET @Resultado = 1
+		end
+		else
+		set @Mensaje = 'El nombre del producto ya existe'
+
+	commit tran
+end try
+
+begin catch
+	IF @@TRANCOUNT > 0
+        ROLLBACK TRAN;
+
+	SET @Resultado = 0
+	set @Mensaje = 'Se produjo un error'
+
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[sp_EditarUsuario]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE proc [dbo].[sp_EditarUsuario](
+@IdUsuario int,
+@Nombre varchar(100),
+@Apellido varchar(100),
+@Email varchar(100),
+@Activo bit,
+@Telefono varchar(50),
+@EsAdmin bit,
+@Mensaje varchar(500) output,
+@Resultado int output
+)
+as
+begin
+	SET @Resultado = 0
+	IF NOT EXISTS (SELECT * FROM USUARIO WHERE Email = @Email and IdUsuario != @IdUsuario)
+	begin
+
+		update top (1) USUARIO set
+		Nombre = @Nombre,
+		Apellido = @Apellido,
+		Email = @Email,
+		Activo = @Activo,
+		Telefono = ISNULL(@Telefono, ''),
+		EsAdmin = @EsAdmin
+		where IdUsuario = @IdUsuario
+
+		SET @Resultado = 1
+	end
+	else
+	set @Mensaje = 'El correo del usuario ya existe'
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_EditarUsuarioAdmin]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create proc [dbo].[sp_EditarUsuarioAdmin](
+@IdUsuario int,
+@Nombre varchar(100),
+@Apellido varchar(100),
+@Email varchar(100),
+@Activo bit,
+@EsAdmin bit,
+@Mensaje varchar(500) output,
+@Resultado int output
+)
+as
+begin
+	SET @Resultado = 0
+	IF NOT EXISTS (SELECT * FROM USUARIO WHERE Email = @Email and IdUsuario != @IdUsuario)
+	begin
+
+		update top (1) USUARIO set
+		Nombre = @Nombre,
+		Apellido = @Apellido,
+		Email = @Email,
+		Activo = @Activo,
+		EsAdmin = @EsAdmin
+		where IdUsuario = @IdUsuario
+
+		SET @Resultado = 1
+	end
+	else
+	set @Mensaje = 'El correo del usuario ya existe'
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_EliminarCarrito]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create proc [dbo].[sp_EliminarCarrito](
+@IdUsuario int,
+@IdProducto int,
+@Resultado bit output
+)
+as
+begin
+
+    set @Resultado = 1
+    declare @cantidadproducto int = (select Cantidad from CARRITO 
+                                     where IdUsuario = @IdUsuario 
+                                       and ProductoId = @IdProducto)
+
+    BEGIN TRY
+
+        BEGIN TRANSACTION OPERACION
+
+        update PRODUCTO 
+            set Stock = Stock + @cantidadproducto 
+            where Id = @IdProducto
+
+        delete top (1) from CARRITO 
+            where IdUsuario = @IdUsuario 
+              and ProductoId = @IdProducto
+
+        COMMIT TRANSACTION OPERACION
+
+    END TRY
+    BEGIN CATCH
+        set @Resultado = 0
+        ROLLBACK TRANSACTION OPERACION
+    END CATCH
+
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_EliminarCategoria]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_EliminarCategoria](
+@IdCategoria int,
+@Mensaje varchar(500) output,
+@Resultado int output
+)
+as
+begin
+	set @Resultado = 0
+	if not exists (select * from PRODUCTO p inner join
+	CATEGORIA c on c.Id = p.CategoriaId
+	where p.CategoriaId = @IdCategoria)
+	begin
+		delete top (1) from CATEGORIA where Id = @IdCategoria
+		set @Resultado = 1
+	end
+	set @Mensaje = 'La categoria se encuentra relacionada a un producto'
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_EliminarMarca]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_EliminarMarca](
+@IdMarca int,
+@Mensaje varchar(500) output,
+@Resultado int output
+)
+as
+begin
+	set @Resultado = 0
+	if not exists (select * from PRODUCTO p inner join
+	MARCA m on m.Id = p.MarcaId
+	where p.MarcaId = @IdMarca)
+	begin
+		delete top (1) from MARCA where Id = @IdMarca
+		set @Resultado = 1
+	end
+	set @Mensaje = 'La Marca se encuentra relacionada a un producto'
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_EliminarProducto]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE proc [dbo].[sp_EliminarProducto](
+@IdProducto int,
+@Mensaje varchar(500) output,
+@Resultado bit output
+)
+as
+begin try
+	begin tran
+
+		set @Resultado = 0
+		if not exists (select * from DETALLE_VENTA dv
+			inner join PRODUCTO p on p.Id = dv.IdProducto
+			where p.Id = @IdProducto)
+
+			begin
+				delete top (1) from DetalleProducto where ProductoId = @IdProducto
+				delete top (1) from PRODUCTO where Id = @IdProducto
+
+				set @Resultado = 1
+			end
+		else
+		set @Mensaje = 'El Producto se ecuentra relacionado a una venta'
+
+	commit tran
+end try
+
+begin catch
+	
+	rollback tran
+
+	set @Mensaje = 'Se produjo un error al eliminar'
+	set @Resultado = 0
+
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ExisteCarrito]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create proc [dbo].[sp_ExisteCarrito](
+@IdUsuario int,
+@IdProducto int,
+@Resultado bit output
+)
+as
+begin
+	if exists(select * from carrito where IdUsuario = @IdUsuario and ProductoId = @IdProducto)
+		set @Resultado = 1
+	else
+		set @Resultado = 0
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_OperacionCarrito]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create proc [dbo].[sp_OperacionCarrito](
+@IdUsuario int,
+@IdProducto int,
+@Sumar bit,
+@Mensaje varchar(500) output,
+@Resultado bit output
+)
+as
+begin
+	set @Resultado = 1
+	set @Mensaje = ''
+
+	declare @existecarrito bit = iif(exists(select * from CARRITO where IdUsuario = @IdUsuario and ProductoId = @IdProducto),1,0)
+	declare @stockproducto int = (select stock from PRODUCTO where Id = @IdProducto)
+
+	begin try
+
+		begin transaction OPERACION
+
+		if(@Sumar = 1)
+		begin
+
+			if(@stockproducto > 0)
+			begin 
+
+				if(@existecarrito = 1)
+					update CARRITO set Cantidad = Cantidad + 1 where IdUsuario = @IdUsuario and ProductoId = @IdProducto
+				else
+					insert into CARRITO(IdUsuario, ProductoId, Cantidad) values (@IdUsuario, @IdProducto, 1)
+
+				update PRODUCTO set Stock = Stock - 1 where Id = @IdProducto
+			end
+			else
+			begin
+				set @Resultado = 0
+				set @Mensaje = 'El producto no cuenta con stock disponible'
+			end
+		end
+		else
+		begin
+			update CARRITO set Cantidad = Cantidad - 1 where IdUsuario = @IdUsuario and ProductoId = @IdProducto
+			update PRODUCTO set stock = stock + 1 where Id = @IdProducto
+		end
+
+		commit transaction OPERACION
+
+	end try
+	begin catch
+		set @Resultado = 0
+		set @Mensaje = ERROR_MESSAGE()
+		rollback transaction OPERACION
+	end catch
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_RegistrarCategoria]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_RegistrarCategoria](
+@Descripcion varchar(100),
+@Activo bit,
+@Mensaje varchar(500) output,
+@Resultado int output
+)
+as
+begin
+	SET @Resultado = 0
+	IF NOT EXISTS (SELECT * FROM CATEGORIA WHERE Descripcion = @Descripcion)
+	begin
+		insert into CATEGORIA (Descripcion,Activo) values
+		(@Descripcion,@Activo)
+
+		SET @Resultado = SCOPE_IDENTITY()
+	end
+	else
+	set @Mensaje = 'la categoria ya existe'
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_RegistrarMarca]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_RegistrarMarca](
+@Descripcion varchar(100),
+@Activo bit,
+@Mensaje varchar(500) output,
+@Resultado int output
+)
+as
+begin
+	SET @Resultado = 0
+	IF NOT EXISTS (SELECT * FROM MARCA WHERE Descripcion = @Descripcion)
+	begin
+		insert into MARCA (Descripcion,Activo) values
+		(@Descripcion,@Activo)
+
+		SET @Resultado = SCOPE_IDENTITY()
+	end
+	else
+	set @Mensaje = 'la Marca ya existe'
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_RegistrarProducto]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_RegistrarProducto](
+@Nombre varchar(100),
+@Descripcion varchar(100),
+@IdMarca varchar(100),
+@IdCategoria varchar(100),
+@Stock int,
+@Activo bit,
+@PrecioCompra decimal(10,2),
+@PrecioVenta decimal(10,2),
+@CantidadCompra int,
+@Mensaje varchar(500) output,
+@Resultado int output
+)
+as
+begin try
+
+	begin tran
+		declare @IdAutogenerado int;
+
+		set @Resultado = 0
+		if not exists (select 1 from PRODUCTO where Nombre = @Nombre)
+		begin
+			insert into PRODUCTO (Nombre, Descripcion, MarcaId, CategoriaId, Stock, Activo) values
+			(@Nombre, @Descripcion, @IdMarca, @IdCategoria, @Stock, @Activo);
+
+			set @IdAutogenerado = SCOPE_IDENTITY();
+
+			insert into DetalleProducto (ProductoId, FechaIngreso, PrecioCompra, PrecioVenta, CantidadCompra) values
+			(@IdAutogenerado, getdate(), @PrecioCompra, @PrecioVenta, @CantidadCompra);
+
+			set @Resultado = @IdAutogenerado;
+			set @Mensaje = ''
+		end
+		else
+		set @Mensaje = 'El producto ya existe'
+
+	commit tran;
+
+end try
+
+begin catch
+	IF @@TRANCOUNT > 0
+        ROLLBACK TRAN;
+
+	set @Mensaje = ERROR_MESSAGE();
+	set @Resultado = 0;
+
+end catch
+GO
+/****** Object:  StoredProcedure [dbo].[sp_RegistrarUsuario]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE proc [dbo].[sp_RegistrarUsuario](
+@Nombre varchar(100),
+@Apellido varchar(100),
+@Email varchar(100),
+@Clave varchar(100),
+@Activo bit,
+@Mensaje varchar(500) output,
+@Resultado int output
+)
+as
+begin
+	set @Resultado = 0
+	if not exists (select * from USUARIO where Email = @Email)
+	begin
+		insert into USUARIO(Nombre,Apellido,Email,Clave,Telefono,ImagenPerfil,Activo,Reestablecer,EsAdmin) values
+		(@Nombre,@Apellido,@Email,@Clave,'','',@Activo,0,0)
+
+		set @Resultado = SCOPE_IDENTITY()
+	end
+	else
+	set @Mensaje = 'El correo del usuario ya existe'
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ReporteDashboard]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_ReporteDashboard]
+as
+begin
+	select
+		(select COUNT(*) from USUARIO) [TotalCliente],
+		(select ISNULL(SUM(cantidad),0) from DETALLE_VENTA) [TotalVenta],
+		(select COUNT(*) from PRODUCTO) [TotalProducto]
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ReporteVentas]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE proc [dbo].[sp_ReporteVentas](
+@fechainicio varchar(10),
+@fechafin varchar(10),
+@idtransaccion varchar(50)
+)
+as
+begin
+
+	set dateformat dmy;
+
+	select CONVERT(char(10), v.FechaVenta,103)[FechaVenta],CONCAT(c.Nombre,' ',c.Apellido)[Cliente],
+	p.Nombre[Producto], dp.PrecioVenta[Precio], dv.Cantidad, dv.Total, v.IdTransaccion
+	from DETALLE_VENTA dv
+	inner join PRODUCTO p on p.Id = dv.IdProducto
+	inner join DetalleProducto dp on dp.ProductoId = p.Id
+	inner join VENTA v on v.IdVenta = dv.IdVenta
+	inner join USUARIO c on c.IdUsuario = v.IdUsuario
+	where (
+			(@fechainicio IS NULL OR CONVERT(date, v.FechaVenta) >= @fechainicio)
+		AND (@fechafin   IS NULL OR CONVERT(date, v.FechaVenta) <= @fechafin)
+	)
+	and v.IdTransaccion  = iif(@idtransaccion = '', v.IdTransaccion, @idtransaccion)
+
+
+end
+GO
+/****** Object:  StoredProcedure [dbo].[USP_RegistrarVenta]    Script Date: 8/4/2026 18:33:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[USP_RegistrarVenta](
+    @IdUsuario      int,
+    @IdTransaccion  varchar(50),
+    @MontoTotal     decimal(18,2),
+    @Direccion      varchar(100),
+    @DetalleVenta   [Detalle_Venta] READONLY,
+    @Resultado      bit OUTPUT,
+    @Mensaje        varchar(500) OUTPUT
+)
+AS
+BEGIN
+    BEGIN TRY
+        DECLARE @IdVenta int = 0
+        SET @Resultado = 1
+        SET @Mensaje = ''
+
+        BEGIN TRANSACTION registro
+
+        INSERT INTO Venta(IdUsuario,IdTransaccion,MontoTotal,Direccion)
+        VALUES (@IdUsuario,@IdTransaccion,@MontoTotal,@Direccion)
+
+        SET @IdVenta = SCOPE_IDENTITY()
+
+        INSERT INTO DETALLE_VENTA(IdVenta, IdProducto, Cantidad, Total)
+        SELECT @IdVenta, IdProducto, Cantidad, Total
+        FROM @DetalleVenta
+
+        DELETE FROM CARRITO WHERE IdUsuario = @IdUsuario
+
+        COMMIT TRANSACTION registro
+    END TRY
+    BEGIN CATCH
+        SET @Resultado = 0
+        SET @Mensaje = ERROR_MESSAGE()
+        ROLLBACK TRANSACTION registro
+    END CATCH
+END
+GO
+USE [master]
+GO
+ALTER DATABASE [TiendaOnline_DB] SET  READ_WRITE 
+GO

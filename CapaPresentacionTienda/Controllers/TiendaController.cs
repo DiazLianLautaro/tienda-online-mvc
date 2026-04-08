@@ -78,7 +78,7 @@ namespace CapaPresentacionTienda.Controllers
         }
 
         [HttpPost]
-        public JsonResult ListarProductos(int idcategoria, int idmarca, int pagina, int cantidad)
+        public JsonResult ListarProductos(int idcategoria, int idmarca, string texto, int pagina, int cantidad)
         {
             List<Producto> lista = new List<Producto>();
 
@@ -102,7 +102,9 @@ namespace CapaPresentacionTienda.Controllers
                 //Si es 0 trae todas las categorías, sino trae la que recibió por parámetro. Lo mismo en marca. También stock > 0 y activo == true
                 p.oCategoria.IdCategoria == (idcategoria == 0 ? p.oCategoria.IdCategoria : idcategoria) &&
                 p.oMarca.IdMarca == (idmarca == 0 ? p.oMarca.IdMarca : idmarca) &&
-                p.Stock > 0 && p.Activo == true
+                p.Stock > 0 && 
+                p.Activo == true &&
+                (string.IsNullOrEmpty(texto) || p.Nombre.ToLower().Contains(texto.ToLower()))
             ).ToList();
 
             int totalRegistros = lista.Count();

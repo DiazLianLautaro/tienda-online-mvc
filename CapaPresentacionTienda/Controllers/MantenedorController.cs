@@ -211,7 +211,6 @@ namespace CapaPresentacionAdmin.Controllers
             {
                 if (archivoImagen != null)
                 {
-                    //string rutaGuardar = ConfigurationManager.AppSettings["ServidorFotos"];
                     string rutaGuardar = Server.MapPath("~/Images/");
                     string extrension = Path.GetExtension(archivoImagen.FileName);
                     string nombreImagen = string.Concat(oProducto.IdProducto.ToString(), extrension);

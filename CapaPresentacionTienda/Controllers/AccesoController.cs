@@ -40,11 +40,11 @@ namespace CapaPresentacionTienda.Controllers
             ViewData["Apellido"] = string.IsNullOrEmpty(objeto.Apellido) ? "" : objeto.Apellido;
             ViewData["Correo"] = string.IsNullOrEmpty(objeto.Email) ? "" : objeto.Email;
 
-            //if (objeto.Clave != objeto.ConfirmarClave)
-            //{
-            //    ViewBag.Error = "Las contraseñas no coinciden";
-            //    return View();
-            //}
+            if (objeto.Clave != objeto.ConfirmarClave)
+            {
+                ViewBag.Error = "Las contraseñas no coinciden";
+                return View();
+            }
 
             resultado = new CN_Usuarios().Registrar(objeto, out mensaje);
 
@@ -178,10 +178,6 @@ namespace CapaPresentacionTienda.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Acceso");
         }
-
-
-
-
 
     }
 }

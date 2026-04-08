@@ -5,7 +5,7 @@
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAALQPd74ANsECThGOBvJWvDQAAAAACAAAAAAAQZgAAAAEAACAAAABj0TvK4NC3odyUQMctYwK77oatphGwlv7Ekpz62fGBDAAAAAAOgAAAAAIAACAAAACEImOBKTnF68VOh14NYb4QsCF7M3qIuVgTj+CBDRVwCiAAAAD5NhFziS2phdvjHHo+AUQ0Dgu0lskCYFmosemUwtZ+WEAAAAA5nYStjkThDl+MARMFmqC3MSbGwaqx9qyfg03Rp3NSes+H+tYEXyp+BnSAGDRUEpTYbioVt5y3NxbvT10uNa8O</EncryptedPassword>
     <_PublishTargetUrl>ftp://155.254.246.47/www.TiendaTest.somee.com</_PublishTargetUrl>
-    <History>True|2026-01-11T15:54:53.6214301Z||;True|2026-01-11T11:41:43.2046608-03:00||;</History>
+    <History>True|2026-01-16T22:43:41.8971322Z||;True|2026-01-16T18:29:16.3897682-03:00||;True|2026-01-11T12:54:53.6214301-03:00||;True|2026-01-11T11:41:43.2046608-03:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -16,16 +16,16 @@
       <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>01/11/2026 12:09:26</publishTime>
+      <publishTime>01/16/2026 18:54:16</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>01/11/2026 12:09:26</publishTime>
+      <publishTime>01/16/2026 18:54:16</publishTime>
     </File>
     <File Include="bin/CapaDatos.dll">
-      <publishTime>01/11/2026 11:01:02</publishTime>
+      <publishTime>01/16/2026 18:53:59</publishTime>
     </File>
     <File Include="bin/CapaDatos.pdb">
-      <publishTime>01/11/2026 11:01:02</publishTime>
+      <publishTime>01/16/2026 18:53:59</publishTime>
     </File>
     <File Include="bin/CapaEntidad.dll">
       <publishTime>01/11/2026 11:01:02</publishTime>
@@ -34,16 +34,16 @@
       <publishTime>01/11/2026 11:01:02</publishTime>
     </File>
     <File Include="bin/CapaNegocio.dll">
-      <publishTime>01/11/2026 11:01:02</publishTime>
+      <publishTime>01/16/2026 18:53:59</publishTime>
     </File>
     <File Include="bin/CapaNegocio.pdb">
-      <publishTime>01/11/2026 11:01:02</publishTime>
+      <publishTime>01/16/2026 18:53:59</publishTime>
     </File>
     <File Include="bin/CapaPresentacionTienda.dll">
-      <publishTime>01/11/2026 11:01:03</publishTime>
+      <publishTime>01/16/2026 18:54:00</publishTime>
     </File>
     <File Include="bin/CapaPresentacionTienda.pdb">
-      <publishTime>01/11/2026 11:01:03</publishTime>
+      <publishTime>01/16/2026 18:54:00</publishTime>
     </File>
     <File Include="bin/ClosedXML.dll">
       <publishTime>05/14/2025 17:51:28</publishTime>
@@ -985,7 +985,7 @@
       <publishTime>09/09/2025 19:58:23</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>01/11/2026 12:09:15</publishTime>
+      <publishTime>01/16/2026 18:54:08</publishTime>
     </File>
     <File Include="Scripts/bootstrap.bundle.js">
       <publishTime>12/07/2025 17:52:10</publishTime>
@@ -1396,19 +1396,19 @@
       <publishTime>12/13/2025 21:50:23</publishTime>
     </File>
     <File Include="Views/Tienda/Blog.cshtml">
-      <publishTime>01/08/2026 11:53:20</publishTime>
+      <publishTime>01/16/2026 17:29:13</publishTime>
     </File>
     <File Include="Views/Tienda/Carrito.cshtml">
       <publishTime>01/07/2026 07:20:44</publishTime>
     </File>
     <File Include="Views/Tienda/Contacto.cshtml">
-      <publishTime>01/09/2026 11:48:05</publishTime>
+      <publishTime>01/13/2026 10:39:32</publishTime>
     </File>
     <File Include="Views/Tienda/DetalleProducto.cshtml">
       <publishTime>01/07/2026 07:36:32</publishTime>
     </File>
     <File Include="Views/Tienda/Index.cshtml">
-      <publishTime>01/11/2026 09:59:49</publishTime>
+      <publishTime>01/13/2026 10:42:20</publishTime>
     </File>
     <File Include="Views/Tienda/PagoEfectuado.cshtml">
       <publishTime>11/26/2025 17:26:19</publishTime>
@@ -1420,7 +1420,7 @@
       <publishTime>09/09/2025 19:58:23</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/11/2026 12:09:13</publishTime>
+      <publishTime>01/16/2026 17:31:45</publishTime>
     </File>
     <File Include="webfonts/fa-brands-400.eot">
       <publishTime>11/11/2025 09:06:26</publishTime>
